@@ -296,7 +296,7 @@ function buildFootCards() {
   });
 }
 
-arynr function handleFile(key, file) {
+apync function handleFile(key, file) {
   const record = activeRecord();
   if (!record || !file) return;
   record.files[key] = {
@@ -732,7 +732,7 @@ function printManufacturingOrder() {
   <tr><td>Material base</td><td>${esc(f.baseMaterial || 'Por definir')}</td></tr>
   <tr><td>Cobertura superior</td><td>${esc(f.topCover || 'Por definir')}</td></tr>
   <tr><td>Correcciones / modificaciones</td><td>${esc(f.corrections || f.technicalNotes || 'Ver notas')}</td></tr>
-  <tr><td>Indicación médica</td><td>${esc(f.medicalIndication || '—')}</td></tr>
+  <tr><td>Indicacióm médica</td><td>${esc(f.medicalIndication || '—')}</td></tr>
 </table>
 
 <h2>Estado y despacho</h2>
