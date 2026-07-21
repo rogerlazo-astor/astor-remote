@@ -1,0 +1,5 @@
+/* Produccion */
+.astor-production-panel{margin-top:28px;padding:24px;border:1px solid rgba(20,60,82,.14);border-radius:22px;background:linear-gradient(145deg,#fff,#f5f9fb)}
+.astor-layer-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.astor-layer-card{position:relative;padding:19px;border:1px solid #d7e3e9;border-radius:17px;background:#fff}
+.astor-production-chip{background:#e7f7f2;color:#0d6c52;font-weight:700;padding:7px 10px;border-radius:999px;font-size:13px}

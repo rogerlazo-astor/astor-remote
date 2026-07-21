@@ -1,0 +1,6 @@
+/* ASTOR LAB */
+.astor-lab-hero{display:flex;align-items:flex-start;justify-content:space-between;GAP:22px;padding:26px;border-radius:22px;background:linear-gradient(135deg,#0b2f45,#087c83);color:#fff}
+.astor-lab-hero h3{margin:0 0 10px;color:#fff;font-size:30px}
+.astor-lab-summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin:20px 0}
+.astor-lab-table{min-width:1220px}
+.astor-lab-table th{background:#eef6f7;color:#35596b}
