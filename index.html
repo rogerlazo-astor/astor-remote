@@ -1,0 +1,1019 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071827">
+  <meta name="description" content="ASTOR Remote Clinic: evaluación remota para órtesis plantares personalizadas.">
+  <title>ASTOR Remote Clinic</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.modules.css">
+  <link rel="stylesheet" href="production.ui.css">
+  <link rel="stylesheet" href="astor.lab.css">
+  <link rel="stylesheet" href="reception.lab.css">
+  <link rel="stylesheet" href="cloud.sync.css">
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <img class="brand-logo" src="icon.svg" alt="ASTOR">
+        <div>
+          <h1>ASTOR Remote Clinic</h1>
+          <p>Laboratorio de Biomecánica de la Marcha</p>
+        </div>
+      </div>
+
+      <nav class="nav-list" aria-label="Secciones">
+        <button class="nav-item active" data-section="inicio" type="button">
+          <span class="icon">A</span><span>Inicio</span>
+        </button>
+        <button class="nav-item" data-section="pacientes" type="button">
+          <span class="icon">P</span><span>Pacientes</span>
+        </button>
+        <button class="nav-item" data-section="panel-pro" type="button">
+          <span class="icon">C</span><span>Panel profesional</span>
+        </button>
+        <button class="nav-item" data-section="pedidos" type="button">
+          <span class="icon">O</span><span>Pedidos</span>
+        </button>
+        <button class="nav-item" data-section="ficha" type="button">
+          <span class="icon">1</span><span>Datos del paciente</span>
+        </button>
+        <button class="nav-item" data-section="consentimiento" type="button">
+          <span class="icon">2</span><span>Consentimiento</span>
+        </button>
+        <button class="nav-item" data-section="evaluacion" type="button">
+          <span class="icon">3</span><span>Evaluación clínica</span>
+        </button>
+        <button class="nav-item" data-section="imagenes" type="button">
+          <span class="icon">4</span><span>Receta y pies</span>
+        </button>
+        <button class="nav-item" data-section="postura" type="button">
+          <span class="icon">5</span><span>Postura</span>
+        </button>
+        <button class="nav-item" data-section="marcha" type="button">
+          <span class="icon">6</span><span>Marcha</span>
+        </button>
+        <button class="nav-item" data-section="medidas" type="button">
+          <span class="icon">7</span><span>Medidas</span>
+        </button>
+        <button class="nav-item" data-section="medir-foto" type="button">
+          <span class="icon">8</span><span>Medir foto</span>
+        </button>
+        <button class="nav-item" data-section="orden" type="button">
+          <span class="icon">9</span><span>Pago y orden</span>
+        </button>
+        <button class="nav-item" data-section="revision" type="button">
+          <span class="icon">✓</span><span>Revisión final</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-actions">
+        <button id="newRecordBtn" class="primary-btn" type="button">Nuevo caso</button>
+        <button id="exportBtn" class="ghost-btn" type="button">Exportar ficha</button>
+        <button id="demoRecordBtn" class="ghost-btn" type="button" title="Crea un caso de ejemplo para explorar la app">✦ Caso de ejemplo</button>
+      </div>
+
+      <div class="astor-brand">
+        <img src="icon.svg" alt="ASTOR Centro Ortopédico">
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">ASTOR ECOSYSTEM · REMOTE CLINIC</p>
+          <h2 id="activePatientTitle">Sin paciente seleccionado</h2>
+        </div>
+        <div class="status-strip">
+          <span id="saveState">Guardado local</span>
+          <span id="recordCode">Código: nuevo</span>
+        </div>
+      </header>
+
+      <!-- INICIO COMERCIAL -->
+      <section id="inicio" class="view active-view">
+        <div class="pro-hero">
+          <div>
+            <p class="eyebrow">Atención remota guiada</p>
+            <h3>No vendemos plantillas. Diseñamos una órtesis plantar personalizada para cada pie.</h3>
+            <p>
+              Completa una evaluación clínica remota, carga tu orden médica, fotografías y video.
+              Un profesional de ASTOR revisará el caso antes de autorizar la fabricación.
+            </p>
+            <div class="pro-actions">
+              <button class="primary-btn" type="button" id="startRemoteBtn" data-goto="ficha">
+                Comenzar mi evaluación
+              </button>
+              <button class="ghost-btn" type="button" data-goto="imagenes">
+                Ver guía de fotografías
+              </button>
+            </div>
+          </div>
+          <div class="pro-scan">
+            <strong>100%</strong>
+            <span>personalizada</span>
+          </div>
+        </div>
+
+        <div class="pro-kpi-grid">
+          <article><span>1</span><p>evaluación clínica</p></article>
+          <article><span>10</span><p>vistas de los pies</p></article>
+          <article><span>1</span><p>video de marcha</p></article>
+          <article><span>ASTOR</span><p>revisión profesional</p></article>
+        </div>
+
+        <div class="pro-module-grid">
+          <article>
+            <h4>1. Completa tus antecedentes</h4>
+            <p>Datos personales, motivo de consulta, antecedentes de salud, peso, estatura y actividad.</p>
+          </article>
+          <article>
+            <h4>2. Sigue la guía de captura</h4>
+            <p>La aplicación indica cómo tomar las fotografías y el video para que el material sea útil.</p>
+          </article>
+          <article>
+            <h4>3. Revisión profesional</h4>
+            <p>El caso no pasa a fabricación hasta que un profesional de ASTOR revise la información.</p>
+          </article>
+          <article>
+            <h4>4. Fabricación y despacho</h4>
+            <p>La órtesis se fabrica de manera personalizada y se despacha con seguimiento.</p>
+          </article>
+        </div>
+
+        <div class="history-panel">
+          <h3>Antes de comenzar</h3>
+          <p>
+            Ten a mano tu receta médica, un teléfono con cámara, una regla o tarjeta bancaria,
+            el calzado que utilizas habitualmente y un espacio de al menos 6 metros para grabar la marcha.
+          </p>
+        </div>
+      </section>
+
+      <!-- PANEL PROFESIONAL -->
+      <section id="panel-pro" class="view">
+        <div class="pro-hero">
+          <div>
+            <p class="eyebrow">Centro de control ASTOR</p>
+            <h3>Gestión clínica y operativa de casos remotos.</h3>
+            <p>
+              Integra ingreso clínico, captura guiada, medición desde fotografía,
+              validación, fabricación, despacho y seguimiento.
+            </p>
+            <div class="pro-actions">
+              <button class="primary-btn" type="button" data-goto="ficha">Crear ficha clínica</button>
+              <button class="ghost-btn" type="button" data-goto="medir-foto">Medir desde foto</button>
+              <button class="ghost-btn" type="button" id="validateReadyBtn">Validar caso</button>
+            </div>
+          </div>
+          <div class="pro-scan">
+            <strong id="proQualityScore">0%</strong>
+            <span>preparación remota</span>
+          </div>
+        </div>
+
+        <div class="pro-kpi-grid">
+          <article><span id="kpiPatients">0</span><p>pacientes</p></article>
+          <article><span id="kpiReady">0</span><p>listos para revisión</p></article>
+          <article><span id="kpiProduction">0</span><p>fabricación / despacho</p></article>
+          <article><span>PDF</span><p>orden imprimible</p></article>
+        </div>
+
+        <div class="pro-module-grid">
+          <article>
+            <h4>Validación clínica</h4>
+            <p>Revisa antecedentes, receta, fotografías, medidas, video y calidad de captura.</p>
+            <button class="ghost-btn" type="button" id="validateReadyBtnAlt">Revisar faltantes</button>
+          </article>
+          <article>
+            <h4>WhatsApp o correo</h4>
+            <p>Genera un mensaje para solicitar antecedentes o archivos faltantes.</p>
+            <button class="ghost-btn" type="button" id="copyWhatsAppBtn">Copiar solicitud</button>
+          </article>
+          <article>
+            <h4>Respaldo de casos</h4>
+            <p>Exporta o restaura la base local en JSON para respaldo o migración entre dispositivos.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="ghost-btn" type="button" id="exportDatabaseBtn">Exportar base</button>
+              <button class="ghost-btn" type="button" id="importDatabaseBtn">Importar / restaurar</button>
+            </div>
+          </article>
+          <article>
+            <h4>Orden técnica</h4>
+            <p>Registra diseño, materiales, correcciones y trazabilidad de fabricación.</p>
+            <button class="ghost-btn" type="button" data-goto="orden">Ir a orden</button>
+          </article>
+        </div>
+
+        <div class="history-panel">
+          <div class="section-head compact-head">
+            <div>
+              <h3>Historial operativo</h3>
+              <p>Últimos eventos del caso activo.</p>
+            </div>
+            <button class="ghost-btn" type="button" id="addReviewNoteBtn">Agregar nota técnica</button>
+          </div>
+          <div id="caseHistory" class="history-list"></div>
+        </div>
+      </section>
+
+      <!-- PEDIDOS -->
+      <section id="pedidos" class="view">
+        <div class="section-head">
+          <div>
+            <h3>Administración de pedidos</h3>
+            <p>Ingresos, faltantes, pagos, fabricación y despacho.</p>
+          </div>
+          <div class="order-filter-bar">
+            <button class="filter-chip active" type="button" data-order-filter="todos">Todos</button>
+            <button class="filter-chip" type="button" data-order-filter="revision">Revisión</button>
+            <button class="filter-chip" type="button" data-order-filter="faltantes">Faltantes</button>
+            <button class="filter-chip" type="button" data-order-filter="pago">Pago</button>
+            <button class="filter-chip" type="button" data-order-filter="fabricacion">Fabricación</button>
+            <button class="filter-chip" type="button" data-order-filter="despacho">Despacho</button>
+          </div>
+        </div>
+
+        <div class="ops-summary">
+          <article><span id="opsNew">0</span><p>ingresos</p></article>
+          <article><span id="opsMissing">0</span><p>con faltantes</p></article>
+          <article><span id="opsPaid">0</span><p>pagos validados</p></article>
+          <article><span id="opsShip">0</span><p>por despacho</p></article>
+        </div>
+
+        <div class="orders-board" id="ordersBoard"></div>
+      </section>
+
+      <!-- PACIENTES -->
+      <section id="pacientes" class="view">
+        <div class="remote-command">
+          <div>
+            <p class="eyebrow">Casos clínicos remotos</p>
+            <h3>Pacientes, captura, medición, orden y despacho.</h3>
+            <p>Abre cada caso y revisa su avance antes de autorizar fabricación.</p>
+          </div>
+          <div class="remote-command-actions">
+            <button class="primary-btn" type="button" data-goto="panel-pro">Panel profesional</button>
+            <button class="ghost-btn" type="button" data-goto="imagenes">Guía de fotos</button>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <div>
+            <h3>Lista de pacientes</h3>
+            <p>Buscar por nombre, documento, teléfono, ciudad o código.</p>
+          </div>
+          <label class="search-box">
+            <span>Buscar</span>
+            <input id="searchInput" type="search" placeholder="Nombre, RUT, teléfono o código">
+          </label>
+        </div>
+
+        <div class="patient-layout">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Paciente</th>
+                  <th>Ciudad</th>
+                  <th>Estado</th>
+                  <th>Envío</th>
+                  <th>Fecha</th>
+                </tr>
+              </thead>
+              <tbody id="patientsTable"></tbody>
+            </table>
+          </div>
+
+          <aside class="summary-panel">
+            <h3>Resumen del caso</h3>
+            <div class="summary-grid">
+              <span>Receta</span><strong id="summaryPrescription">Pendiente</strong>
+              <span>Fotos de pies</span><strong id="summaryPhotos">0 / 10</strong>
+              <span>Medición</span><strong id="summaryMeasure">Pendiente</strong>
+              <span>Video de marcha</span><strong id="summaryVideo">Pendiente</strong>
+              <span>Pago</span><strong id="summaryPayment">Pendiente</strong>
+              <span>Despacho</span><strong id="summaryShipping">Pendiente</strong>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- FICHA -->
+      <section id="ficha" class="view">
+        <div class="section-head">
+          <div>
+            <h3>1. Datos del paciente</h3>
+            <p>Información personal, contacto, envío y antropometría.</p>
+          </div>
+          <span class="badge">Paso 1 de 9</span>
+        </div>
+
+        <form id="recordForm" class="form-grid">
+          <fieldset>
+            <legend>Identificación y contacto</legend>
+            <label>Nombre completo<input name="fullName" autocomplete="name" required></label>
+            <label>RUT / DNI / Pasaporte<input name="documentId" autocomplete="off"></label>
+            <label>Fecha de nacimiento<input name="birthDate" type="date"></label>
+            <label>Sexo
+              <select name="sex">
+                <option value=""></option>
+                <option>Femenino</option>
+                <option>Masculino</option>
+                <option>Otro</option>
+                <option>Prefiere no indicar</option>
+              </select>
+            </label>
+            <label>Teléfono / WhatsApp<input name="phone" type="tel" autocomplete="tel" required></label>
+            <label>Correo electrónico<input name="email" type="email" autocomplete="email"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Dirección de envío</legend>
+            <label>Dirección<input name="address" autocomplete="street-address"></label>
+            <label>Comuna<input name="commune"></label>
+            <label>Ciudad<input name="city" required></label>
+            <label>Región / Estado<input name="region"></label>
+            <label>País<input name="country" value="Chile"></label>
+            <label>Empresa de despacho
+              <select name="carrier">
+                <option value=""></option>
+                <option>Starken</option>
+                <option>Chilexpress</option>
+                <option>Blue Express</option>
+                <option>FedEx</option>
+                <option>Retiro en local</option>
+                <option>Por definir</option>
+              </select>
+            </label>
+            <label>Código de seguimiento<input name="trackingCode"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Antropometría</legend>
+            <label>Peso kg<input id="weightKg" name="weightKg" type="number" min="1" max="350" step="0.1"></label>
+            <label>Estatura cm<input id="heightCm" name="heightCm" type="number" min="50" max="250" step="0.1"></label>
+            <label>IMC
+              <input id="bmiValue" name="bmiValue" readonly placeholder="Se calcula automáticamente">
+            </label>
+            <label>Clasificación IMC
+              <input id="bmiClassification" name="bmiClassification" readonly>
+            </label>
+            <label>Profesión / ocupación<input name="occupation"></label>
+            <label>Horas de pie al día<input name="standingHours" type="number" min="0" max="24" step="0.5"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Objetivo funcional</legend>
+            <label>¿Qué quiere volver a hacer?
+              <select name="functionalGoal">
+                <option value=""></option>
+                <option>Caminar sin dolor</option>
+                <option>Trabajar sin dolor</option>
+                <option>Volver a correr</option>
+                <option>Volver al deporte</option>
+                <option>Prevenir lesiones</option>
+                <option>Mejorar estabilidad</option>
+                <option>Otro</option>
+              </select>
+            </label>
+            <label>Actividad o deporte principal<input name="mainActivity"></label>
+            <label>Nivel de actividad
+              <select name="activityLevel">
+                <option value=""></option>
+                <option>Baja / oficina</option>
+                <option>Trabajo de pie</option>
+                <option>Caminatas frecuentes</option>
+                <option>Deporte recreativo</option>
+                <option>Alto rendimiento</option>
+              </select>
+            </label>
+            <label>Observaciones funcionales<textarea name="functionalNotes" rows="5"></textarea></label>
+          </fieldset>
+
+          <fieldset class="wide">
+            <legend>Antecedentes clínicos</legend>
+            <label>Diagnóstico / motivo de consulta<textarea name="diagnosis" rows="3"></textarea></label>
+            <label>Indicación médica<textarea name="medicalIndication" rows="3"></textarea></label>
+            <label>Observaciones para fabricación<textarea name="manufacturingNotes" rows="3"></textarea></label>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- CONSENTIMIENTO -->
+      <section id="consentimiento" class="view">
+        <div class="section-head">
+          <div>
+            <h3>2. Consentimiento informado</h3>
+            <p>Autorización para evaluación remota, tratamiento de datos e imágenes.</p>
+          </div>
+          <span class="badge">Paso 2 de 9</span>
+        </div>
+
+        <div class="form-grid">
+          <fieldset class="wide">
+            <legend>Información para el paciente</legend>
+            <p>
+              La evaluación remota orienta la confección de una órtesis plantar personalizada
+              utilizando antecedentes clínicos, receta médica, fotografías, video y medidas.
+              No reemplaza una evaluación médica presencial ni constituye un diagnóstico médico autónomo.
+            </p>
+            <p>
+              ASTOR podrá solicitar repetir archivos o recomendar atención presencial cuando la calidad
+              de la información sea insuficiente o existan signos de alarma.
+            </p>
+          </fieldset>
+
+          <fieldset class="wide">
+            <legend>Autorizaciones</legend>
+            <div class="quality-list">
+              <label><input name="consentRemoteEvaluation" type="checkbox"> Autorizo la evaluación remota.</label>
+              <label><input name="consentHealthData" type="checkbox"> Autorizo el tratamiento de mis datos de salud.</label>
+              <label><input name="consentPhotosVideos" type="checkbox"> Autorizo el uso clínico de fotografías y videos.</label>
+              <label><input name="consentCommunication" type="checkbox"> Autorizo contacto por teléfono, WhatsApp o correo.</label>
+              <label><input name="consentTerms" type="checkbox"> Declaro que la información entregada es verdadera.</label>
+              <label><input name="consentResearch" type="checkbox"> Autorizo uso anonimizado para investigación (opcional).</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Firma electrónica simple</legend>
+            <label>Nombre de quien acepta<input name="consentSignerName"></label>
+            <label>RUT / DNI del firmante<input name="consentSignerId"></label>
+            <label>Relación con el paciente
+              <select name="consentSignerRole">
+                <option>Paciente</option>
+                <option>Madre</option>
+                <option>Padre</option>
+                <option>Tutor legal</option>
+                <option>Representante</option>
+              </select>
+            </label>
+            <label>Fecha de aceptación<input name="consentDate" type="date"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Menores de edad</legend>
+            <label><input name="isMinor" type="checkbox"> El paciente es menor de edad.</label>
+            <label>Nombre del adulto responsable<input name="guardianName"></label>
+            <label>Teléfono del responsable<input name="guardianPhone" type="tel"></label>
+          </fieldset>
+        </div>
+      </section>
+
+      <!-- EVALUACIÓN -->
+      <section id="evaluacion" class="view">
+        <div class="section-head">
+          <div>
+            <h3>3. Evaluación clínica remota</h3>
+            <p>Dolor, síntomas, antecedentes, uso y señales de alerta.</p>
+          </div>
+          <span class="badge warn" id="remoteReadiness">Revisión pendiente</span>
+        </div>
+
+        <div class="evaluation-grid">
+          <fieldset>
+            <legend>Dolor y síntomas</legend>
+            <label>Intensidad del dolor 0 a 10<input name="painScale" type="number" min="0" max="10" step="1"></label>
+            <label>Zona principal
+              <select name="mainPainArea">
+                <option value=""></option>
+                <option>Talón</option>
+                <option>Arco plantar</option>
+                <option>Antepié / metatarsos</option>
+                <option>Dedos / juanete</option>
+                <option>Tobillo</option>
+                <option>Rodilla</option>
+                <option>Cadera</option>
+                <option>Espalda</option>
+                <option>Sin dolor</option>
+              </select>
+            </label>
+            <label>Pie
+              <select name="painSide">
+                <option value=""></option>
+                <option>Derecho</option>
+                <option>Izquierdo</option>
+                <option>Ambos</option>
+                <option>No aplica</option>
+              </select>
+            </label>>
+            <label>Tiempo de evolución<input name="symptomDuration" placeholder="Ej.: 3 meses"></label>
+            <label>Objetivo principal
+              <select name="treatmentGoal">
+                <option value=""></option>
+                <option>Disminuir dolor</option>
+                <option>Mejorar marcha</option>
+                <option>Uso deportivo</option>
+                <option>Uso laboral</option>
+                <option>Prevención</option>
+              </select>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Uso y calzado</legend>
+            <label>Tipo de calzado
+              <select name="footwearType">
+                <option value=""></option>
+                <option>Zapatilla deportiva</option>
+                <option>Zapato laboral</option>
+                <option>Zapato escolar</option>
+                <option>Calzado de seguridad</option>
+                <option>Botín</option>
+                <option>Otro</option>
+              </select>
+            </label>
+            <label>Marca y modelo<input name="shoeModel"></label>
+            <label>Número de calzado<input name="generalShoeSize" type="number" min="15" step="0.5"></label>
+            <label>Uso diario estimado<input name="dailyUseHours" placeholder="Ej.: 8 horas"></label>
+            <label>Plantillas anteriores
+              <select name="previousInsoles">
+                <option value=""></option>
+                <option>No</option>
+                <option>Sí, prefabricadas</option>
+                <option>Sí, personalizadas</option>
+              </select>
+            </label>
+          </fieldset>
+
+          <fieldset class="wide">
+            <legend>Antecedentes y mapa rápido</legend>
+            <div class="check-grid">
+              <label><input name="painHeel" type="checkbox"> Dolor de talón</label>
+              <label><input name="painArch" type="checkbox"> Dolor de arco</label>
+              <label><input name="painForefoot" type="checkbox"> Dolor de antepié</label>
+              <label><input name="painToe" type="checkbox"> Dedos / hallux valgus</label>
+              <label><input name="painKnee" type="checkbox"> Rodilla / cadera</label>
+              <label><input name="hasDiabetes" type="checkbox"> Diabetes</label>
+              <label><input name="hasHypertension" type="checkbox"> Hipertensión</label>
+              <label><input name="hasArthritis" type="checkbox"> Artritis / artrosis</label>
+              <label><input name="redFlagNeuropathy" type="checkbox"> Pérdida de sensibilidad</label>
+              <label><input name="redFlagRecentInjury" type="checkbox"> Lesión reciente</label>
+              <label><input name="hasWound" type="checkbox"> Herida o úlcera</label>
+              <label><input name="previousSurgery" type="checkbox"> Cirugía previa</label>
+            </div>
+            <label>Medicamentos, alergias y otros antecedentes<textarea name="medicalBackground" rows="4"></textarea></label>
+            <label>Notas de evaluación<textarea name="evaluationNotes" rows="4"></textarea></label>
+          </fieldset>
+
+          <fieldset class="wide">
+            <legend>Control de calidad de captura</legend>
+            <div class="quality-list">
+              <label><input name="qcPhotosSharp" type="checkbox"> Fotografías nítidas y con buena luz</label>
+              <label><input name="qcFullFoot" type="checkbox"> Pie completo visible</label>
+              <label><input name="qcReferenceVisible" type="checkbox"> Regla o referencia visible</label>
+              <label><input name="qcCameraParallel" type="checkbox"> Cámara paralela al plano solicitado</label>
+              <label><input name="qcBothFeet" type="checkbox"> Ambos pies registrados</label>
+              <label><input name="qcGaitReady" type="checkbox"> Video útil para revisión</label>
+            </div>
+          </fieldset>
+        </div>
+      </section>
+
+      <!-- IMÁGENES DE PIES Y RECETA -->
+      <section id="imagenes" class="view">
+        <div class="media-header">
+          <div>
+            <h3>4. Receta y fotografías de los pies</h3>
+            <p>Receta médica y cinco vistas de cada pie.</p>
+          </div>
+          <span class="badge">Paso 4 de 9</span>
+        </div>
+
+        <div class="capture-guide-panel">
+          <article><strong>1</strong><span>Buena luz y fondo limpio.</span></article>
+          <article><strong>2</strong><span>Pie completo dentro de la imagen.</span></article>
+          <article><strong>3</strong><span>Usar regla o tarjeta para referencia.</span></article>
+          <article><strong>4</strong><span>No usar filtros ni editar las fotos.</span></article>
+        </div>
+
+        <div class="upload-grid">
+          <article class="upload-card prescription-card">
+            <div>
+              <h4>Receta médica</h4>
+              <p>Fotografía o PDF legible de la indicación.</p>
+            </div>
+            <input id="prescriptionInput" type="file" accept="image/*,.pdf" capture="environment">
+            <div id="prescriptionPreview" class="preview-zone"></div>
+          </article>
+        </div>
+
+        <div id="footPhotoGrid" class="foot-grid"></div>
+      </section>
+
+      <!-- POSTURA -->
+      <section id="postura" class="view">
+        <div class="media-header">
+          <div>
+            <h3>5. Fotografías posturales</h3>
+            <p>Estas imágenes preparan la evaluación postural y la futura asistencia por IA.</p>
+          </div>
+          <span class="badge">Paso 5 de 9</span>
+        </div>
+
+        <div class="capture-guide-panel">
+          <article><strong>1</strong><span>Paciente descalzo y con ropa ajustada.</span></article>
+          <article><strong>2</strong><span>Cuerpo completo, cabeza y pies visibles.</span></article>
+          <article><strong>3</strong><span>Cámara a nivel de la pelvis y sin inclinación.</span></article>
+          <article><strong>4</strong><span>Fondo liso y buena iluminación.</span></article>
+        </div>
+
+        <div class="upload-grid">
+          <article class="upload-card">
+            <h4>Vista frontal</h4>
+            <input id="postureFrontInput" type="file" accept="image/*" capture="environment">
+            <div id="postureFrontPreview" class="preview-zone">Sin archivo</div>
+          </article>
+          <article class="upload-card">
+            <h4>Vista posterior</h4>
+            <input id="postureBackInput" type="file" accept="image/*" capture="environment">
+            <div id="postureBackPreview" class="preview-zone">Sin archivo</div>
+          </article>
+          <article class="upload-card">
+            <h4>Lateral derecha</h4>
+            <input id="postureRightInput" type="file" accept="image/*" capture="environment">
+            <div id="postureRightPreview" class="preview-zone">Sin archivo</div>
+          </article>
+          <article class="upload-card">
+            <h4>Lateral izquierda</h4>
+            <input id="postureLeftInput" type="file" accept="image/*" capture="environment">
+            <div id="postureLeftPreview" class="preview-zone">Sin archivo</div>
+          </article>
+        </div>
+
+        <fieldset class="wide">
+          <legend>Análisis postural</legend>
+          <p>
+            La versión inicial almacenará las fotografías para revisión profesional.
+            El análisis automático por IA se incorporará después de validar el protocolo clínico.
+          </p>
+          <label>Observaciones posturales del profesional<textarea name="posturalNotes" rows="5"></textarea></label>
+        </fieldset>
+      </section>
+
+      <!-- MARCHA -->
+      <section id="marcha" class="view">
+        <div class="section-head">
+          <div>
+            <h3>6. Video de marcha</h3>
+            <p>Pasillo de 6 metros, cámara baja, paciente descalzo, ida y vuelta.</p>
+          </div>
+          <span class="badge">Paso 6 de 9</span>
+        </div>
+
+        <div class="gait-layout">
+          <div class="capture-panel">
+            <input id="gaitVideoInput" type="file" accept="video/*" capture="environment">
+            <div id="gaitVideoPreview" class="video-preview"></div>
+          </div>
+          <div class="check-panel">
+            <h3>Control de la toma</h3>
+            <label><input name="barefoot" type="checkbox"> Paciente descalzo</label>
+            <label><input name="sixMeters" type="checkbox"> Pasillo aproximado de 6 metros</label>
+            <label><input name="lowCamera" type="checkbox"> Cámara a baja altura</label>
+            <label><input name="kneesVisible" type="checkbox"> Rodillas y pies visibles</label>
+            <label><input name="roundTrip" type="checkbox"> Ida y vuelta completas</label>
+            <label>Notas de marcha<textarea name="gaitNotes" rows="6"></textarea></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- MEDIDAS -->
+      <section id="medidas" class="view">
+        <div class="measure-toolbar">
+          <div>
+            <h3>7. Medidas para fabricación</h3>
+            <p>Registrar ambos pies. No asumir que son iguales.</p>
+          </div>
+          <button id="copyLeftToRight" class="ghost-btn" type="button">Copiar izquierdo a derecho</button>
+        </div>
+
+        <div class="measure-grid">
+          <fieldset>
+            <legend>Pie izquierdo</legend>
+            <label>Largo total cm<input name="leftLengthCm" type="number" min="0" step="0.1"></label>
+            <label>Ancho cabezas MTT cm<input name="leftMttWidthCm" type="number" min="0" step="0.1"></label>
+            <label>Ancho de talón cm<input name="leftHeelWidthCm" type="number" min="0" step="0.1"></label>
+            <label>Número de calzado<input name="leftShoeSize" type="number" min="15" step="0.5"></label>
+            <label>Tipo de arco
+              <select name="leftArch">
+                <option value=""></option>
+                <option>Plano</option>
+                <option>Normal</option>
+                <option>Cavo</option>
+                <option>Por evaluar</option>
+              </select>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Pie derecho</legend>
+            <label>Largo total cm<input name="rightLengthCm" type="number" min="0" step="0.1"></label>
+            <label>Ancho cabezas MTT cm<input name="rightMttWidthCm" type="number" min="0" step="0.1"></label>
+            <label>Ancho de talón cm<input name="rightHeelWidthCm" type="number" min="0" step="0.1"></label>
+            <label>Número de calzado<input name="rightShoeSize" type="number" min="15" step="0.5"></label>
+            <label>Tipo de arco
+              <select name="rightArch">
+                <option value=""></option>
+                <option>Plano</option>
+                <option>Normal</option>
+                <option>Cavo</option>
+                <option>Por evaluar</option>
+              </select>
+            </label>
+          </fieldset>
+
+          <fieldset class="wide">
+            <legend>Propuesta técnica</legend>
+            <label>Tipo de órtesis
+              <select name="insoleType">
+                <option value=""></option>
+                <option>Órtesis plantar funcional</option>
+                <option>Órtesis de descarga</option>
+                <option>Órtesis deportiva</option>
+                <option>Órtesis para pie diabético</option>
+                <option>Órtesis pediátrica</option>
+                <option>Por definir después de revisión</option>
+              </select>
+            </label>
+            <label>Material base
+              <select name="baseMaterial">
+                <option value=""></option>
+                <option>EVA</option>
+                <option>Resina</option>
+                <option>Polipropileno</option>
+                <option>Mixta</option>
+              </select>
+            </label>
+            <label>Cubierta
+              <select name="coverMaterial">
+                <option value=""></option>
+                <option>Cuero</option>
+                <option>Microfibra</option>
+                <option>Neopreno</option>
+                <option>Antibacteriana</option>
+              </select>
+            </label>
+            <label>Correcciones, descargas y elementos<textarea name="corrections" rows="5"></textarea></label>
+          </fieldset>
+        </div>
+      </section>
+
+      <!-- MEDICIÓN DESDE FOTO -->
+      <section id="medir-foto" class="view">
+        <div class="measure-photo-layout">
+          <div class="measure-photo-main">
+            <div class="measure-toolbar">
+              <div>
+                <h3>8. Medir desde fotografía</h3>
+                <p>Calibra con una referencia de largo conocido y marca los puntos del pie.</p>
+              </div>
+              <label class="ghost-btn file-action">
+                Cargar fotografía
+                <input id="photoMeasureInput" type="file" accept="image/*" capture="environment">
+              </label>
+            </div>
+
+            <div class="sole-camera-panel">
+              <div class="sole-camera-copy">
+                <h4>Captura plantar asistida</h4>
+                <p>
+                  Coloca el teléfono de forma segura, con la cámara mirando hacia arriba,
+                  y ubica el pie dentro del contorno sin apoyar peso sobre el dispositivo.
+                </p>
+              </div>
+              <div class="sole-camera-grid">
+                <div class="sole-camera-stage">
+                  <video id="soleCameraVideo" playsinline muted></video>
+                  <div class="sole-outline" aria-hidden="true"><span></span></div>
+                  <div class="sole-scan-line" aria-hidden="true"></div>
+                  <p id="soleCameraStatus">Cámara cerrada</p>
+                </div>
+                <div class="sole-camera-actions">
+                  <button id="openSoleCamera" class="primary-btn" type="button">Abrir cámara frontal</button>
+                  <button id="autoSoleCapture" class="ghost-btn" type="button">Captura automática</button>
+                  <button id="captureSolePhoto" class="ghost-btn" type="button">Capturar ahora</button>
+                  <button id="closeSoleCamera" class="ghost-btn" type="button">Cerrar cámara</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="photo-measure-stage" id="photoMeasureStage">
+              <canvas id="photoMeasureCanvas" width="1200" height="800"></canvas>
+              <div id="photoMeasureEmpty" class="photo-empty">
+                <div class="photo-empty-mark"><span></span></div>
+                <p>La fotografía capturada o cargada aparecerá aquí.</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="measure-photo-panel">
+            <fieldset>
+              <legend>Calibración</legend>
+              <label>Referencia sugerida
+                <select id="calibrationPreset">
+                  <option value="10">Regla de 10 cm</option>
+                  <option value="20">Regla de 20 cm</option>
+                  <option value="8.56">Tarjeta bancaria 8,56 cm</option>
+                  <option value="21">Hoja A4 lado corto 21 cm</option>
+                  <option value="custom">Personalizada</option>
+                </select>
+              </label>
+              <label>Referencia real cm<input id="calibrationCm" type="number" min="0.1" step="0.1" value="10"></label>
+              <div class="button-row">
+                <button id="setCalibrationMode" class="primary-btn" type="button">Marcar referencia</button>
+                <button id="undoPhotoPoint" class="ghost-btn" type="button">Deshacer punto</button>
+              </div>
+              <button id="clearPhotoMeasure" class="ghost-btn full-width" type="button">Limpiar medición</button>
+              <p id="calibrationStatus" class="helper-text">Sin calibrar</p>
+            </fieldset>
+
+            <fieldset>
+              <legend>Medición</legend>
+              <div class="button-row">
+                <button id="setLengthMode" class="ghost-btn" type="button">Medir largo</button>
+                <button id="setWidthMode" class="ghost-btn" type="button">Medir ancho</button>
+              </div>
+              <div class="result-grid">
+                <span>Largo</span><strong id="photoLengthResult">-- cm</strong>
+                <span>Ancho</span><strong id="photoWidthResult">-- cm</strong>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Guardar en ficha</legend>
+              <label>Pie
+                <select id="photoTargetFoot">
+                  <option value="left">Izquierdo</option>
+                  <option value="right">Derecho</option>
+                </select>
+              </label>
+              <label>Campo de ancho
+                <select id="photoWidthField">
+                  <option value="mtt">Cabezas MTT</option>
+                  <option value="heel">Talón</option>
+                </select>
+              </label>
+              <button id="applyPhotoMeasures" class="primary-btn" type="button">Pasar a medidas</button>
+            </fieldset>
+          </aside>
+        </div>
+      </section>
+
+      <!-- PAGO Y ORDEN -->
+      <section id="orden" class="view">
+        <div class="section-head">
+          <div>
+            <h3>9. Pago, producción y despacho</h3>
+            <p>Validación financiera y trazabilidad operativa del caso.</p>
+          </div>
+          <span class="badge">Paso 9 de 9</span>
+        </div>
+
+        <div class="order-grid">
+          <fieldset>
+            <legend>Pago</legend>
+            <label>Medio de pago
+              <select name="paymentMethod">
+                <option>Transferencia</option>
+                <option>Link de pago</option>
+                <option>Webpay</option>
+                <option>Efectivo / local</option>
+              </select>
+            </label>
+            <label>Monto<input name="paymentAmount" type="number" min="0" step="1000"></label>
+            <label>Fecha del pago<input name="paymentDate" type="date"></label>
+            <label>Estado del pago
+              <select name="paymentStatus">
+                <option>Pendiente</option>
+                <option>Comprobante recibido</option>
+                <option>Validado</option>
+                <option>Reembolsado</option>
+              </select>
+            </label>
+            <label>Comprobante<input id="paymentProofInput" type="file" accept="image/*,.pdf" capture="environment"></label>
+            <div id="paymentProofPreview" class="preview-zone"></div>
+            <div class="order-actions">
+              <button id="copyPaymentMsgBtn" class="ghost-btn" type="button">Copiar mensaje de pago</button>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Producción y despacho</legend>
+            <label>Estado de la orden
+              <select name="orderStatus">
+                <option>Ingreso</option>
+                <option>En revisión</option>
+                <option>Información faltante</option>
+                <option>Aprobada</option>
+                <option>En fabricación</option>
+                <option>Control de calidad</option>
+                <option>Lista para despacho</option>
+                <option>Despachada</option>
+                <option>Entregada</option>
+              </select>
+            </label>
+            <label>Fecha de fabricación<input name="manufacturingDate" type="date"></label>
+            <label>Fecha de despacho<input name="shippingDate" type="date"></label>
+            <label>Enlace de seguimiento<input name="trackingUrl" type="url" placeholder="https://"></label>
+            <label>Revisión técnica<textarea name="technicalReviewNotes" rows="4"></textarea></label>
+            <label>Notas internas<textarea name="internalNotes" rows="5"></textarea></label>
+            <div class="order-actions">
+              <button id="printOrderBtn" class="primary-btn" type="button">Imprimir orden de fabricación</button>
+              <button id="copyOrderMsgBtn" class="ghost-btn" type="button">Copiar solicitud de antecedentes</button>
+              <button id="copyShippingMsgBtn" class="ghost-btn" type="button">Mensaje de despacho</button>
+              <button id="copyPostDeliveryMsgBtn" class="ghost-btn" type="button">Mensaje post-entrega</button>
+            </div>
+          </fieldset>
+        </div>
+      </section>
+
+      <!-- REVISIÓN -->
+      <section id="revision" class="view">
+        <div class="section-head">
+          <div>
+            <h3>Revisión final del caso</h3>
+            <p>Verifica que la información esté completa antes de enviarla a revisión profesional.</p>
+          </div>
+          <span class="badge warn">Pendiente</span>
+        </div>
+
+        <div class="pro-kpi-grid">
+          <article><span id="reviewPatient">—</span><p>paciente</p></article>
+          <article><span id="reviewConsent">—</span><p>consentimiento</p></article>
+          <article><span id="reviewMedia">—</span><p>archivos</p></article>
+          <article><span id="reviewPayment">—</span><p>pago</p></article>
+        </div>
+
+        <div class="pro-module-grid">
+          <article>
+            <h4>Datos clínicos</h4>
+            <p>Identificación, contacto, antecedentes, dolor, objetivos e IMC.</p>
+          </article>
+          <article>
+            <h4>Evidencia visual</h4>
+            <p>Receta, fotografías de los pies, postura y video de marcha.</p>
+          </article>
+          <article>
+            <h4>Fabricación</h4>
+            <p>Medidas, producto, materiales y correcciones propuestas.</p>
+          </article>
+          <article>
+            <h4>Estado financiero</h4>
+            <p>Medio de pago, comprobante y validación.</p>
+          </article>
+        </div>
+
+        <div class="history-panel">
+          <h3>Declaración final</h3>
+          <label class="quality-list">
+            <span>
+              <input name="finalConfirmation" type="checkbox">
+              Confirmo que revisé los antecedentes y que la información entregada es correcta.
+            </span>
+          </label>
+          <div class="pro-actions">
+            <button class="primary-btn" type="button" id="validateFinalBtn">Validar caso completo</button>
+            <button class="ghost-btn" type="button" data-goto="panel-pro">Enviar a revisión profesional</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <template id="footPhotoTemplate">
+    <article class="upload-card">
+      <div class="upload-title">
+        <h4></h4>
+        <span></span>
+      </div>
+      <input type="file" accept="image/*" capture="environment">
+      <div class="preview-zone"></div>
+    </article>
+  </template>
+
+  <noscript>
+    Esta aplicación necesita JavaScript para funcionar.
+  </noscript>
+
+  <script src="app.js"></script>
+  <script src="app.mvp.js"></script>
+  <script src="app.modules.js"></script>
+  <script src="js/engines/fabrication.engine.js"></script>
+  <script src="js/data/materials.library.js"></script>
+  <script src="production.ui.js"></script>
+  <script src="astor.lab.js"></script>
+  <script src="reception.lab.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.config.js"></script>
+  <script src="cloud.sync.js"></script>
+  <script src="cloud.panel.js"></script>
+</body>
+</html>
