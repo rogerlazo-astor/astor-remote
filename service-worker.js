@@ -1,4 +1,4 @@
-const CACHE_NAME = 'astor-remote-v14';
+const CACHE_NAME = 'astor-remote-v15';
 const ASSETS = [
   './',
   './index.html',
