@@ -17,6 +17,7 @@ const ASSETS = [
   './js/data/materials.library.js',
   './manifest.webmanifest',
   './icon.svg',
+  './logo.png',
   './photo-guide.svg'
 ];
 
