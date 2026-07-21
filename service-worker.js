@@ -37,8 +37,9 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
+  // No cachear Supabase ni CDN externos
   const url = event.request.url;
-  if (url.includes('supabase.co') || url.includes('sdelivr') || url.includes('cdn.')) {
+  if (url.includes('supabase.co') || url.includes('jsdelivr') || url.includes('cdn.')) {
     event.respondWith(fetch(event.request));
     return;
   }
