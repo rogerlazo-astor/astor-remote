@@ -120,6 +120,13 @@ async function init(){
     }else{setTimeout(tryInject,400);}
   };
   tryInject();
+  // Safety-net: if auth-in active but name empty, fill from astor-profile
+  setTimeout(()=>{try{
+    const un=document.getElementById('aUserName'),ue=document.getElementById('aUserEmail'),nb=document.querySelector('[data-section="nube"]');
+    const p=JSON.parse(localStorage.getItem('astor-profile')||'{}');
+    if(un&&!un.textContent&&p.name){un.textContent=p.name;if(ue)ue.textContent=p.email||'';}
+    if(nb&&(!nb.textContent||nb.textContent==='☁ '||nb.textContent.includes('?'))&&p.name)nb.textContent='☁ '+p.name.split(' ')[0];
+  }catch(ex){}},1200);
   client.auth.onAuthStateChange((_,session)=>{
     updateUI(session?.user||null);
     if(session?.user&&window.ASTOR_CLOUD?.init)window.ASTOR_CLOUD.init();
