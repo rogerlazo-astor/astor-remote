@@ -18,30 +18,30 @@ function readiness(r){
   const done=[],block=[],warn=[];
   (r.fields?.fullName&&r.fields?.phone&&r.fields?.city?done:block).push("Datos del paciente");
   (consentOk(r)?done:block).push("Consentimiento");
-  (r.files?.prescription?done:block).push("Receta médica");
-  const pc=photoCount(r); (pc>=6?done:block).push(`Fotografías ${pc}/10`);
+  (r.files?.prescription?done:block).push("Receta mÃ©dica");
+  const pc=photoCount(r); (pc>=6?done:block).push(`FotografÃ­as ${pc}/10`);
   (r.files?.gaitVideo?done:warn).push("Video de marcha");
   (r.fields?.leftLengthCm||r.fields?.rightLengthCm?done:block).push("Medidas");
   (r.fields?.paymentStatus==="Validado"?done:warn).push(`Pago: ${r.fields?.paymentStatus||"Pendiente"}`);
-  (r.checks?.fabricationProposalApproved?done:block).push("Aprobación técnica");
+  (r.checks?.fabricationProposalApproved?done:block).push("AprobaciÃ³n tÃ©cnica");
   if(block.length)return{color:"red",label:"No fabricar",canSend:false,done,block,warn};
   if(warn.length)return{color:"yellow",label:"Listo con observaciones",canSend:true,done,block,warn};
-  return{color:"green",label:"Listo para producción",canSend:true,done,block,warn};
+  return{color:"green",label:"Listo para producciÃ³n",canSend:true,done,block,warn};
 }
 function inject(){
   const nav=q(".nav-list"),main=q(".main-panel");
   if(nav&&!q('[data-section="recepcion-lab"]')){
     const b=document.createElement("button"); b.className="nav-item"; b.type="button"; b.dataset.section="recepcion-lab";
-    b.innerHTML='<span class="icon">R</span><span>Recepción LAB</span>'; nav.appendChild(b);
+    b.innerHTML='<span class="icon">R</span><span>RecepciÃ³n LAB</span>'; nav.appendChild(b);
     b.onclick=()=>{document.querySelectorAll(".nav-item").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".view").forEach(x=>x.classList.remove("active-view"));q("#recepcion-lab")?.classList.add("active-view");render()};
   }
   if(main&&!q("#recepcion-lab")){
     const s=document.createElement("section"); s.id="recepcion-lab"; s.className="view";
-    s.innerHTML<`<div class="reception-hero"><div><p class="eyebrow">ASTOR · RECEPCIÓN LAB</p><h3>Finalizar caso y enviar a producción</h3><p>Revisa los requisitos antes de liberar el caso.</p></div><div id="receptionTraffic" class="reception-traffic red"><span></span><strong id="receptionLabel">Sin caso</strong></div></div>
-    <div class="reception-case"><div><small>Paciente</small><strong id="rPatient">—</strong></div><div><small>Sódigo clínico</small><strong id="rClinical">—</strong></div><div><small>Código producción</small><strong id="rProduction">—</strong></div><div><small>Sede</small><strong id="rCity">—</strong></div></div>
+    s.innerHTML<`<div class="reception-hero"><div><p class="eyebrow">ASTOR Â· RECEPCIÃN LAB</p><h3>Finalizar caso y enviar a producciÃ³n</h3><p>Revisa los requisitos antes de liberar el caso.</p></div><div id="receptionTraffic" class="reception-traffic red"><span></span><strong id="receptionLabel">Sin caso</strong></div></div>
+    <div class="reception-case"><div><small>Paciente</small><strong id="rPatient">â</strong></div><div><small>SÃ³digo clÃ­nico</small><strong id="rClinical">â</strong></div><div><small>CÃ³digo producciÃ³n</small><strong id="rProduction">â</strong></div><div><small>Sede</small><strong id="rCity">â</strong></div></div>
     <div class="reception-grid"><article><h4>Completado</h4><ul id="rDone"></ul></article><article><h4>Bloqueos</h4><ul id="rBlock"></ul></article><article><h4>Advertencias</h4><ul id="rWarn"></ul></article></div>
-    <fieldset><legend>Control final</legend><label>Responsable<input name="receptionResponsible"></label><label>Prioridad<select name="labPriority"><option>Normal</option><option>Alta</option><option>Urgente</option><option>Baja</option></select></label><label>Observaciones<textarea name="receptionLabNotes" rows="4"></textarea></label><label><input type="checkbox" name="receptionFinalConfirmation"> Confirmo la revisión final.</label><div class="reception-actions"><button id="rRefresh" class="ghost-btn" type="button">Actualizar</button><button id="rSend" class="primary-btn" type="button">Enviar a producción</button></div></fieldset>`;
-    main.appendChild(s); q("#rRefresh").onclick=render; q("#rSend").onclick=send;
+    <fieldset><legend>Control final</legend><label>Responsable<input name="receptionResponsible"></label><label>Prioridad<select name="labPriority"><option>Normal</option><option>Alta</option><option>Urgente</option><option>Baja</option></select></label><label>Observaciones<textarea name="receptionLabNotes" rows="4"></textarea></label><label><input type="checkbox" name="receptionFinalConfirmation"> Confirmo la revisiÃ³n final.</label><div class="reception-actions"><button id="rRefresh" class="ghost-btn" type="button">Actualizar</button><button id="rSend" class="primary-btn" type="button">Enviar a producciÃ³n</button></div></fieldset>`;
+    main.appendChild(s); const _rr=q("#rRefresh");if(_rr)_rr.onclick=render; const _rs=q("#rSend");if(_rs)_rs.onclick=send;
     s.querySelectorAll("input[name],select[name],textarea[name]").forEach(x=>x.addEventListener(x.type==="checkbox"||x.tagName==="SELECT"?"change":"input",persist));
   }
 }
@@ -57,15 +57,15 @@ function persist(){
 }
 function render(){
   const r=rec(),st=readiness(r),t=q("#receptionTraffic"); if(!t)return;
-  t.className=`reception-traffic ${st.color}`;q("#receptionLabel").textContent=st.label;q("#rPatient").textContent=r?.fields?.fullName||"—";q("#rClinical").textContent=r?.code||"—";q("#rProduction").textContent=r?shortCode(r):"—";q("#rCity").textContent=r?.fields?.city||"—";q("#rDone").innerHTML=li(st.done,"Nada completado");q("#rBlock").innerHTML=li(st.block,"Sin bloqueos");q("#rWarn").innerHTML=li(st.warn,"Sin advertencias");q("#rSend").disabled=!st.canSend;loadFields(r);
+  t.className=`reception-traffic ${st.color}`;q("#receptionLabel").textContent=st.label;q("#rPatient").textContent=r?.fields?.fullName||"â";q("#rClinical").textContent=r?.code||"â";q("#rProduction").textContent=r?shortCode(r):"â";q("#rCity").textContent=r?.fields?.city||"â";q("#rDone").innerHTML=li(st.done,"Nada completado");q("#rBlock").innerHTML=li(st.block,"Sin bloqueos");q("#rWarn").innerHTML=li(st.warn,"Sin advertencias");q("#rSend").disabled=!st.canSend;loadFields(r);
 }
 async function send(){
   const r=rec();if(!r)return alert("Selecciona un caso.");persist();const st=readiness(r);
-  if(!r.checks?.receptionFinalConfirmation)return alert("Confirma la revisión final.");
+  if(!r.checks?.receptionFinalConfirmation)return alert("Confirma la revisiÃ³n final.");
   if(!st.canSend)return alert("No se puede enviar.\n\nFalta:\n- "+st.block.join("\n- "));
-  const now=new Date().toISOString();r.fields.labStage="Ingreso";r.fields.orderStatus="En fabricación";r.fields.sentToProductionAt=now;r.history=r.history||[];r.history.unshift({at:now,title:"Caso enviado a ASTOR LAB",detail:`${shortCode(r)} · ${r.fields.receptionResponsible||"Recepción"}`});
+  const now=new Date().toISOString();r.fields.labStage="Ingreso";r.fields.orderStatus="En fabricaciÃ³n";r.fields.sentToProductionAt=now;r.history=r.history||[];r.history.unshift({at:now,title:"Caso enviado a ASTOR LAB",detail:`${shortCode(r)} Â· ${r.fields.receptionResponsible||"RecepciÃ³n"}`});
   if(typeof saveRecord==="function")await saveRecord(r);else if(typeof persistActive==="function")persistActive();
-  if(typeof renderAll==="function")renderAll();alert(`Caso ${shortCode(r)} enviado a producción.`);render();
+  if(typeof renderAll==="function")renderAll();alert(`Caso ${shortCode(r)} enviado a producciÃ³n.`);render();
 }
 function init(){inject();setTimeout(render,350);const title=q("#activePatientTitle");if(title&&window.MutationObserver)new MutationObserver(()=>setTimeout(render,60)).observe(title,{childList:true,subtree:true,characterData:true})}
 init();
