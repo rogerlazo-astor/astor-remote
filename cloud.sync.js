@@ -174,6 +174,7 @@
     try { await init(); } catch (error) { console.error("ASTOR Cloud init error:", error); }
   }
 
-  window.ASTOR_CLOUD = { init, syncRecord, listCloudCases, listCaseFiles, isConfigured };
+  function getClient(){ return state.authClient||null; }
+  window.ASTOR_CLOUD = { init, syncRecord, listCloudCases, listCaseFiles, isConfigured, getClient };
   initUi();
 })();
