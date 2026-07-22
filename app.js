@@ -296,7 +296,7 @@ function buildFootCards() {
   });
 }
 
-apync function handleFile(key, file) {
+async function handleFile(key, file) {
   const record = activeRecord();
   if (!record || !file) return;
   record.files[key] = {
@@ -697,8 +697,8 @@ function printManufacturingOrder() {
 <body>
 <header>
   <div>
-    <h1>Orden de Fabricación</h1>
-    <p style="margin:0;font-size:13px;color:#607b8e">ASTOR Remote Clinic · Plantillas Ortopédicas</p>
+    <h1>Orden de FabricaciÃ³n</h1>
+    <p style="margin:0;font-size:13px;color:#607b8e">ASTOR Remote Clinic Â· Plantillas OrtopÃ©dicas</p>
   </div>
   <div style="text-align:right">
     <div class="code">${esc(record.code)}</div>
@@ -708,49 +708,49 @@ function printManufacturingOrder() {
 
 <h2>Datos del paciente</h2>
 <table>
-  <tr><td>Nombre</td><td>${esc(f.fullName || '—')}</td></tr>
-  <tr><td>Teléfono / WhatsApp</td><td>${esc(f.phone || '—')}</td></tr>
-  <tr><td>Ciudad / despacho</td><td>${esc(f.city || '—')}</td></tr>
-  <tr><td>Diagnóstico</td><td>${esc(f.diagnosis || f.mainPainArea || '—')}</td></tr>
+  <tr><td>Nombre</td><td>${esc(f.fullName || 'â')}</td></tr>
+  <tr><td>TelÃ©fono / WhatsApp</td><td>${esc(f.phone || 'â')}</td></tr>
+  <tr><td>Ciudad / despacho</td><td>${esc(f.city || 'â')}</td></tr>
+  <tr><td>DiagnÃ³stico</td><td>${esc(f.diagnosis || f.mainPainArea || 'â')}</td></tr>
 </table>
 
 <h2>Medidas</h2>
 <table>
-  <tr><td>Largo pie izquierdo</td><td>${esc(f.leftLengthCm || '—')} cm</td></tr>
-  <tr><td>Largo pie derecho</td><td>${esc(f.rightLengthCm || '—')} cm</td></tr>
-  <tr><td>Ancho MTT izquierdo</td><td>${esc(f.leftMttWidthCm || '—')} cm</td></tr>
-  <tr><td>Ancho MTT derecho</td><td>${esc(f.rightMttWidthCm || '—')} cm</td></tr>
-  <tr><td>Ancho talón izquierdo</td><td>${esc(f.leftHeelWidthCm || '—')} cm</td></tr>
-  <tr><td>Ancho talón derecho</td><td>${esc(f.rightHeelWidthCm || '—')} cm</td></tr>
-  <tr><td>Talla calzado izquierdo</td><td>${esc(f.leftShoeSize || '—')}</td></tr>
-  <tr><td>Talla calzado derecho</td><td>${esc(f.rightShoeSize || '—')}</td></tr>
+  <tr><td>Largo pie izquierdo</td><td>${esc(f.leftLengthCm || 'â')} cm</td></tr>
+  <tr><td>Largo pie derecho</td><td>${esc(f.rightLengthCm || 'â')} cm</td></tr>
+  <tr><td>Ancho MTT izquierdo</td><td>${esc(f.leftMttWidthCm || 'â')} cm</td></tr>
+  <tr><td>Ancho MTT derecho</td><td>${esc(f.rightMttWidthCm || 'â')} cm</td></tr>
+  <tr><td>Ancho talÃ³n izquierdo</td><td>${esc(f.leftHeelWidthCm || 'â')} cm</td></tr>
+  <tr><td>Ancho talÃ³n derecho</td><td>${esc(f.rightHeelWidthCm || 'â')} cm</td></tr>
+  <tr><td>Talla calzado izquierdo</td><td>${esc(f.leftShoeSize || 'â')}</td></tr>
+  <tr><td>Talla calzado derecho</td><td>${esc(f.rightShoeSize || 'â')}</td></tr>
 </table>
 
-<h2>Especificaciones de fabricación</h2>
+<h2>Especificaciones de fabricaciÃ³n</h2>
 <table>
-  <tr><td>Tipo de órtesis / plantilla</td><td>${esc(f.insoleType || 'Por definir')}</td></tr>
+  <tr><td>Tipo de Ã³rtesis / plantilla</td><td>${esc(f.insoleType || 'Por definir')}</td></tr>
   <tr><td>Material base</td><td>${esc(f.baseMaterial || 'Por definir')}</td></tr>
   <tr><td>Cobertura superior</td><td>${esc(f.topCover || 'Por definir')}</td></tr>
   <tr><td>Correcciones / modificaciones</td><td>${esc(f.corrections || f.technicalNotes || 'Ver notas')}</td></tr>
-  <tr><td>Indicacióm médica</td><td>${esc(f.medicalIndication || '—')}</td></tr>
+  <tr><td>IndicaciÃ³m mÃ©dica</td><td>${esc(f.medicalIndication || 'â')}</td></tr>
 </table>
 
 <h2>Estado y despacho</h2>
 <table>
   <tr><td>Estado de la orden</td><td><span class="badge">${esc(f.orderStatus || 'Ingreso')}</span></td></tr>
   <tr><td>Pago</td><td>${esc(f.paymentStatus || 'Pendiente')}</td></tr>
-  <tr><td>Fecha de fabricación</td><td>${esc(f.manufacturingDate || '—')}</td></tr>
-  <tr><td>Fecha de despacho</td><td>${esc(f.shippingDate || '—')}</td></tr>
-  <tr><td>Transportista</td><td>${esc(f.carrier || '—')}</td></tr>
-  <tr><td>Código de seguimiento</td><td>${esc(f.trackingCode || f.trackingUrl || '—')}</td></tr>
+  <tr><td>Fecha de fabricaciÃ³n</td><td>${esc(f.manufacturingDate || 'â')}</td></tr>
+  <tr><td>Fecha de despacho</td><td>${esc(f.shippingDate || 'â')}</td></tr>
+  <tr><td>Transportista</td><td>${esc(f.carrier || 'â')}</td></tr>
+  <tr><td>CÃ³digo de seguimiento</td><td>${esc(f.trackingCode || f.trackingUrl || 'â')}</td></tr>
 </table>
 
-${f.technicalReviewNotes ? `<h2>Revisión técnica</h2><div class="note">${esc(f.technicalReviewNotes)}</div>` : ''}
+${f.technicalReviewNotes ? `<h2>RevisiÃ³n tÃ©cnica</h2><div class="note">${esc(f.technicalReviewNotes)}</div>` : ''}
 ${f.internalNotes ? `<h2>Notas internas</h2><div class="note">${esc(f.internalNotes)}</div>` : ''}
 
 <footer>
-  <span>ASTOR Remote Clinic · ${date}</span>
-  <span>Código: ${esc(record.code)} · Autorización pendiente de profesional responsable</span>
+  <span>ASTOR Remote Clinic Â· ${date}</span>
+  <span>CÃ³digo: ${esc(record.code)} Â· AutorizaciÃ³n pendiente de profesional responsable</span>
 </footer>
 
 <script>window.addEventListener('load',()=>setTimeout(()=>window.print(),400))<\/script>
@@ -762,7 +762,7 @@ ${f.internalNotes ? `<h2>Notas internas</h2><div class="note">${esc(f.internalNo
   w.document.open();
   w.document.write(html);
   w.document.close();
-  addHistoryEvent('Orden de fabricación impresa', `Código ${record.code}`);
+  addHistoryEvent('Orden de fabricaciÃ³n impresa', `CÃ³digo ${record.code}`);
 }
 
 async function importDatabase() {
@@ -778,14 +778,14 @@ async function importDatabase() {
       if (!Array.isArray(imported)) throw new Error('El archivo no es una lista de casos.');
 
       const valid = imported.filter(item => item?.id && item?.code);
-      if (!valid.length) throw new Error('No se encontraron casos válidos en el archivo.');
+      if (!valid.length) throw new Error('No se encontraron casos vÃ¡lidos en el archivo.');
 
-      const confirmMsg = `Se importarán ${valid.length} caso(s).\n\nLos casos existentes con el mismo ID serán sobreescritos.\n¿Continuar?`;
+      const confirmMsg = `Se importarÃ¡n ${valid.length} caso(s).\n\nLos casos existentes con el mismo ID serÃ¡n sobreescritos.\nÂ¿Continuar?`;
       if (!confirm(confirmMsg)) return;
 
       for (const record of valid) {
         record.files = record.files || {};
-        // Los blobs no se guardan en JSON — se dejan vacíos
+        // Los blobs no se guardan en JSON â se dejan vacÃ­os
         for (const key of Object.keys(record.files)) {
           if (record.files[key]) delete record.files[key].blob;
         }
@@ -795,7 +795,7 @@ async function importDatabase() {
       state.records = await getAllRecords();
       renderAll();
       addHistoryEvent('Base importada', `${valid.length} caso(s) restaurados desde ${file.name}.`);
-      alert(`✓ ${valid.length} caso(s) importados correctamente.\n\nNota: los archivos adjuntos (fotos, videos, recetas) no se restauran desde el JSON — solo los datos del formulario.`);
+      alert(`â ${valid.length} caso(s) importados correctamente.\n\nNota: los archivos adjuntos (fotos, videos, recetas) no se restauran desde el JSON â solo los datos del formulario.`);
     } catch (err) {
       alert(`Error al importar: ${err.message}`);
     }
@@ -807,18 +807,18 @@ function buildShippingMessage(record = activeRecord()) {
   if (!record) return '';
   const name = record.fields.fullName || 'paciente';
   const tracking = record.fields.trackingCode || record.fields.trackingUrl || null;
-  const carrier = record.fields.carrier || 'el servicio de envío';
+  const carrier = record.fields.carrier || 'el servicio de envÃ­o';
   const date = record.fields.shippingDate
     ? new Date(record.fields.shippingDate + 'T12:00:00').toLocaleDateString('es-CL', { day: '2-digit', month: 'long', year: 'numeric' })
-    : 'en los próximos días';
+    : 'en los prÃ³ximos dÃ­as';
   return [
-    `Hola ${name}, somos Astor Biomecánica.`,
-    `¡Tu plantilla ortopédica ya fue despachada!`,
-    `Tu número de orden es ${record.code}.`,
-    `Enviamos a través de ${carrier}, despacho estimado: ${date}.`,
-    tracking ? `Código de seguimiento: ${tracking}` : '',
-    `Ante cualquier consulta estamos a tu disposición.`,
-    `¡Que te mejore mucho!`
+    `Hola ${name}, somos Astor BiomecÃ¡nica.`,
+    `Â¡Tu plantilla ortopÃ©dica ya fue despachada!`,
+    `Tu nÃºmero de orden es ${record.code}.`,
+    `Enviamos a travÃ©s de ${carrier}, despacho estimado: ${date}.`,
+    tracking ? `CÃ³digo de seguimiento: ${tracking}` : '',
+    `Ante cualquier consulta estamos a tu disposiciÃ³n.`,
+    `Â¡Que te mejore mucho!`
   ].filter(Boolean).join('\n');
 }
 
@@ -826,19 +826,19 @@ function buildPostDeliveryMessage(record = activeRecord()) {
   if (!record) return '';
   const name = record.fields.fullName || 'paciente';
   return [
-    `Hola ${name}, somos Astor Biomecánica.`,
-    `Esperamos que hayas recibido tu plantilla ortopédica en perfectas condiciones.`,
+    `Hola ${name}, somos Astor BiomecÃ¡nica.`,
+    `Esperamos que hayas recibido tu plantilla ortopÃ©dica en perfectas condiciones.`,
     `Para un mejor resultado, recuerda:`,
-    `· Úsala de forma progresiva los primeros días.`,
-    `· Cualquier molestia inusual nos la cuentas para ajustar.`,
-    `· Recomendamos control a las 4 semanas.`,
-    `¿Pudiste recibirla bien? Nos avisas para cerrar tu caso.`,
-    `¡Gracias por confiar en Astor Biomecánica!`
+    `Â· Ãsala de forma progresiva los primeros dÃ­as.`,
+    `Â· Cualquier molestia inusual nos la cuentas para ajustar.`,
+    `Â· Recomendamos control a las 4 semanas.`,
+    `Â¿Pudiste recibirla bien? Nos avisas para cerrar tu caso.`,
+    `Â¡Gracias por confiar en Astor BiomecÃ¡nica!`
   ].join('\n');
 }
 
 async function createDemoRecord() {
-  if (!confirm('Se creará un caso de ejemplo con datos ficticios para explorar la app.\n¿Continuar?')) return;
+  if (!confirm('Se crearÃ¡ un caso de ejemplo con datos ficticios para explorar la app.\nÂ¿Continuar?')) return;
 
   const now = new Date();
   const demo = {
@@ -847,7 +847,7 @@ async function createDemoRecord() {
     createdAt: now.toISOString(),
     updatedAt: now.toISOString(),
     history: [
-      { title: 'Caso creado', detail: 'Caso de demostración generado automáticamente.', at: now.toISOString() }
+      { title: 'Caso creado', detail: 'Caso de demostraciÃ³n generado automÃ¡ticamente.', at: now.toISOString() }
     ],
     checks: {
       consentRemoteEvaluation: true,
@@ -864,7 +864,7 @@ async function createDemoRecord() {
     },
     files: {},
     fields: {
-      fullName: 'María González Soto',
+      fullName: 'MarÃ­a GonzÃ¡lez Soto',
       documentId: '12.345.678-9',
       phone: '+56 9 8765 4321',
       email: 'maria.gonzalez@ejemplo.cl',
@@ -875,13 +875,13 @@ async function createDemoRecord() {
       bmiValue: '27.1',
       bmiClassification: 'Sobrepeso',
       diagnosis: 'Fascitis plantar bilateral con pie plano flexible grado II',
-      mainPainArea: 'Talón y arco plantar bilateral',
+      mainPainArea: 'TalÃ³n y arco plantar bilateral',
       painScale: '6',
       activityLevel: 'Moderado',
       footwearType: 'Zapatos cerrados con taco bajo',
-      functionalGoal: 'Reducir dolor al caminar más de 30 minutos',
-      medicalIndication: 'Plantilla ortopédica con soporte de arco y descarga de talón',
-      evaluationNotes: 'Paciente con sobrepeso, trabajo de pie 6h/día. Dolor matutino fuerte al levantarse.',
+      functionalGoal: 'Reducir dolor al caminar mÃ¡s de 30 minutos',
+      medicalIndication: 'Plantilla ortopÃ©dica con soporte de arco y descarga de talÃ³n',
+      evaluationNotes: 'Paciente con sobrepeso, trabajo de pie 6h/dÃ­a. Dolor matutino fuerte al levantarse.',
       consentDate: now.toISOString().slice(0, 10),
       leftLengthCm: '24.5',
       rightLengthCm: '24.3',
@@ -893,15 +893,15 @@ async function createDemoRecord() {
       rightShoeSize: '38',
       leftArch: 'Plano',
       rightArch: 'Plano',
-      insoleType: 'Plantilla de soporte total con cuña de pronación',
-      baseMaterial: 'EVA 45° + capa de memoria',
+      insoleType: 'Plantilla de soporte total con cuÃ±a de pronaciÃ³n',
+      baseMaterial: 'EVA 45Â° + capa de memoria',
       topCover: 'Poron 3mm',
-      corrections: 'Cuña varo 4° bilateral, alza de talón 6mm, descarga metatarsal',
-      medicalIndication: 'Soporte plantar completo con control de pronación',
+      corrections: 'CuÃ±a varo 4Â° bilateral, alza de talÃ³n 6mm, descarga metatarsal',
+      medicalIndication: 'Soporte plantar completo con control de pronaciÃ³n',
       paymentMethod: 'Transferencia bancaria',
       paymentAmount: '65000',
       paymentStatus: 'Validado',
-      orderStatus: 'En revisión',
+      orderStatus: 'En revisiÃ³n',
       manufacturingDate: new Date(now.getTime() + 3 * 86400000).toISOString().slice(0, 10),
     }
   };
@@ -911,8 +911,8 @@ async function createDemoRecord() {
   state.activeId = demo.id;
   loadActiveIntoUi();
   renderAll();
-  addHistoryEvent('Caso de ejemplo cargado', 'María González · DEMO · datos ficticios para exploración.');
-  alert(`✓ Caso de ejemplo creado: ${demo.code}\n\nExplora las secciones del menú lateral para ver todas las funciones.\nLos datos son ficticios — puedes eliminarlo cuando termines.`);
+  addHistoryEvent('Caso de ejemplo cargado', 'MarÃ­a GonzÃ¡lez Â· DEMO Â· datos ficticios para exploraciÃ³n.');
+  alert(`â Caso de ejemplo creado: ${demo.code}\n\nExplora las secciones del menÃº lateral para ver todas las funciones.\nLos datos son ficticios â puedes eliminarlo cuando termines.`);
 }
 
 function bindProEnhancements() {
@@ -934,7 +934,7 @@ function bindProEnhancements() {
     const text = buildShippingMessage();
     if (!text) { alert('Primero selecciona un caso.'); return; }
     await copyTextToClipboard(text);
-    addHistoryEvent('Mensaje de despacho copiado', 'Confirmación de envío al portapapeles.');
+    addHistoryEvent('Mensaje de despacho copiado', 'ConfirmaciÃ³n de envÃ­o al portapapeles.');
     alert('Mensaje de despacho copiado.');
   });
   document.querySelector('#copyPostDeliveryMsgBtn')?.addEventListener('click', async () => {
