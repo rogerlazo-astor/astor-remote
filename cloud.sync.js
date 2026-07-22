@@ -1,5 +1,5 @@
 /**
- * ASTOR CLOUD SYNC v2.2
+ * ASTOR CLOUD SYNC v2.3
  */
 (function () {
   "use strict";
@@ -26,11 +26,12 @@
     badge.classList.toggle("error", isError);
   }
 
-  // Custom fetch that injects the user JWT for REST/Storage calls.
-  // Needed because supabase-js with sb_publishable_ keys falls back to anon Bearer
-  // when its internal getSession() returns null (storage lock race).
-  function _buildFetch(supabaseUrl) {
-    return function astorFetch(url, options) {
+  // Patch window.fetch to inject the user JWT for Supabase REST/Storage calls.
+  // supabase-js with sb_publishable_ keys sends anon Bearer when its internal
+  // getSession() returns null (storage lock race). This bypasses that issue.
+  function _patchFetch(supabaseUrl) {
+    const _orig = window.fetch.bind(window);
+    window.fetch = function astorFetch(url, options) {
       const u = String(url);
       if (u.startsWith(supabaseUrl + "/rest/") || u.startsWith(supabaseUrl + "/storage/")) {
         try {
@@ -45,7 +46,7 @@
           }
         } catch (_) {}
       }
-      return fetch(url, options);
+      return _orig(url, options);
     };
   }
 
@@ -54,7 +55,6 @@
     const c = cfg();
     state.authClient = window.supabase.createClient(c.supabaseUrl, c.publishableKey, {
       auth: { storageKey: "astor-remote-auth", persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
-      global: { fetch: _buildFetch(c.supabaseUrl) },
     });
     return state.authClient;
   }
@@ -169,7 +169,7 @@
       if (uploaded.length > 0) await client.from("astor_cases").update({ payload: recordPayload(record) }).eq("id", data.id);
       // Sync inverso
       const remoteStatus = data.status;
-      const localStatus = record.fields?.orderStatus;
+      const localStatus = record.fields.localStatus = record.fields?.orderStatus;
       if (remoteStatus && remoteStatus !== localStatus && remoteStatus !== 'draft') {
         record.fields.orderStatus = remoteStatus;
         console.info(`ASTOR: estado actualizado por admin -> ${remoteStatus}`);
@@ -219,8 +219,11 @@
     try { await init(); } catch (error) { console.error("ASTOR Cloud init error:", error); }
   }
 
-  // Eagerly create auth client to claim localStorage lock BEFORE auth.ui.js runs
-  if (window.supabase?.createClient && isConfigured()) getAuthClient();
+  // Eagerly create auth client + patch window.fetch BEFORE auth.ui.js runs
+  if (window.supabase?.createClient && isConfigured()) {
+    getAuthClient();
+    _patchFetch(cfg().supabaseUrl);
+  }
 
   window.ASTOR_CLOUD = { init, syncRecord, listCloudCases, listCaseFiles, isConfigured, getClient };
   initUi();
