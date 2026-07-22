@@ -8,7 +8,7 @@ function getClient(){
   const cfg=window.ASTOR_CLOUD_CONFIG;
   if(!cfg?.supabaseUrl||!cfg?.publishableKey)return null;
   if(!window.supabase?.createClient)return null;
-  _client=window.supabase.createClient(cfg.supabaseUrl,cfg.publishableKey);
+  _client=window.supabase.createClient(cfg.supabaseUrl,cfg.publishableKey,{auth:{storageKey:"astor-remote-auth",persistSession:true}});
   return _client;
 }
 
