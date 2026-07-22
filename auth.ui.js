@@ -101,7 +101,17 @@ async function init(){
   const tryInject=()=>{
     if(document.querySelector('#nube')){
       injectUI();
-      client.auth.getSession().then(({data:{session}})=>{if(session?.user)updateUI(session.user);});
+      client.auth.getSession().then(async({data:{session}})=>{
+      if(session?.user){updateUI(session.user);return;}
+      // Fallback: Supabase v2 CDN may not auto-read storage; restore manually
+      try{
+        const raw=localStorage.getItem('astor-remote-auth');
+        if(raw){const s=JSON.parse(raw);if(s?.refresh_token){
+          const {data:d}=await client.auth.setSession({access_token:s.access_token,refresh_token:s.refresh_token});
+          if(d?.session?.user)updateUI(d.session.user);
+        }}
+      }catch(e){}
+    });
     }else{setTimeout(tryInject,400);}
   };
   tryInject();
