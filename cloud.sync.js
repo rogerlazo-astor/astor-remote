@@ -1,5 +1,5 @@
 /**
- * ASTOR CLOUD SYNC v2.1
+ * ASTOR CLOUD SYNC v2.2
  */
 (function () {
   "use strict";
@@ -26,11 +26,35 @@
     badge.classList.toggle("error", isError);
   }
 
+  // Custom fetch that injects the user JWT for REST/Storage calls.
+  // Needed because supabase-js with sb_publishable_ keys falls back to anon Bearer
+  // when its internal getSession() returns null (storage lock race).
+  function _buildFetch(supabaseUrl) {
+    return function astorFetch(url, options) {
+      const u = String(url);
+      if (u.startsWith(supabaseUrl + "/rest/") || u.startsWith(supabaseUrl + "/storage/")) {
+        try {
+          const raw = localStorage.getItem("astor-remote-auth");
+          if (raw) {
+            const s = JSON.parse(raw);
+            if (s?.access_token) {
+              const headers = new Headers(options?.headers || {});
+              headers.set("Authorization", "Bearer " + s.access_token);
+              options = Object.assign({}, options, { headers });
+            }
+          }
+        } catch (_) {}
+      }
+      return fetch(url, options);
+    };
+  }
+
   function getAuthClient() {
     if (state.authClient) return state.authClient;
     const c = cfg();
     state.authClient = window.supabase.createClient(c.supabaseUrl, c.publishableKey, {
       auth: { storageKey: "astor-remote-auth", persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+      global: { fetch: _buildFetch(c.supabaseUrl) },
     });
     return state.authClient;
   }
