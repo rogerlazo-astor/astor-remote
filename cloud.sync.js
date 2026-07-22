@@ -195,6 +195,9 @@
     try { await init(); } catch (error) { console.error("ASTOR Cloud init error:", error); }
   }
 
+  // Eagerly create auth client to claim localStorage lock BEFORE auth.ui.js runs
+  if (window.supabase?.createClient && isConfigured()) getAuthClient();
+
   window.ASTOR_CLOUD = { init, syncRecord, listCloudCases, listCaseFiles, isConfigured, getClient };
   initUi();
 })();
