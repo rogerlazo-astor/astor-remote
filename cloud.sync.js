@@ -116,7 +116,7 @@
         file.cloudUrl = urlData?.publicUrl || null;
         await client.from("astor_case_files").upsert({ case_id: caseId, owner_id: userId, file_key: key, file_name: file.name, mime_type: file.type, size_bytes: file.size || null, storage_path: storagePath, public_url: file.cloudUrl }, { onConflict: "case_id,file_key" });
         uploaded.push({ key, path: storagePath, url: file.cloudUrl });
-      } catch (err) { errors.push({ key, error: err.message}); }
+      } catch (err) { errors.push({ key, error: err.message }); }
     }
     return { uploaded, errors };
   }
@@ -152,7 +152,7 @@
       }
       if (typeof persistActive === "function") persistActive();
       if (errors.length > 0) updateCloudBadge(`${uploaded.length} archivos · ${errors.length} errores`, true);
-      else updateCloudBadge(uploaded.length > 0 ? `Sincronizado ½ ${uploaded.length} archivos` : "Sincronizado");
+      else updateCloudBadge(uploaded.length > 0 ? `Sincronizado · ${uploaded.length} archivos` : "Sincronizado");
       return { caseId: data.id, caseCode: data.case_code, uploaded, errors };
     } catch (error) { console.error("ASTOR Cloud sync error:", error); updateCloudBadge("Error", true); throw error; }
   }
@@ -165,7 +165,7 @@
 
   async function listCaseFiles(caseId) {
     await init(); const client = await getDataClient();
-    const { data, error } = await client.from("astor_case_files").select("file_key,file_name,mime_type,size_bytes,public_url,created_at").eq("case_id", caseId.order("created_at", { ascending: true });
+    const { data, error } = await client.from("astor_case_files").select("file_key,file_name,mime_type,size_bytes,public_url,created_at").eq("case_id", caseId).order("created_at", { ascending: true });
     if (error) throw error; return data || [];
   }
 
@@ -184,7 +184,7 @@
         const errMsg = result.errors.length > 0 ? `\n⚠ ${result.errors.length} archivo(s) con error:\n  · ${result.errors.map((e) => e.key).join("\n  · ")}` : "";
         alert(`Caso sincronizado.\nCodigo: ${result.caseCode}${fileMsg}${errMsg}`);
       } catch (error) { alert(`No se pudo sincronizar:\n${error.message}`); }
-      finally { button.disabled = false; button.textContent = "Enviar casoa la nube"; }
+      finally { button.disabled = false; button.textContent = "Enviar caso a la nube"; }
     });
     actions.appendChild(button);
   }
