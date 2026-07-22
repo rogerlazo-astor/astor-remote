@@ -5,10 +5,15 @@ let _client=null;
 
 function getClient(){
   if(_client)return _client;
+  // Reuse cloud.sync.js client to share session storage (avoids lock conflict)
+  if(window.ASTOR_CLOUD?.getClient){
+    const shared=window.ASTOR_CLOUD.getClient();
+    if(shared){_client=shared;return _client;}
+  }
   const cfg=window.ASTOR_CLOUD_CONFIG;
   if(!cfg?.supabaseUrl||!cfg?.publishableKey)return null;
   if(!window.supabase?.createClient)return null;
-  _client=window.supabase.createClient(cfg.supabaseUrl,cfg.publishableKey,{auth:{storageKey:"astor-remote-auth",persistSession:true}});
+  _client=window.supabase.createClient(cfg.supabaseUrl,cfg.publishableKey,{auth:{storageKey:"astor-remote-auth",persistSession:true,autoRefreshToken:true}});
   return _client;
 }
 
