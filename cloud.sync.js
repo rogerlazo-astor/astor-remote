@@ -1,5 +1,5 @@
 /**
- * ASTOR CLOUD SYNC v2.0
+ * ASTOR CLOUD SYNC v2.1
  */
 (function () {
   "use strict";
@@ -35,8 +35,12 @@
     return state.authClient;
   }
 
+  function getClient() { return state.authClient || null; }
+
   async function ensureSession() {
     const client = getAuthClient();
+
+    // 1. Try getSession() — works when storage lock is held by this client
     const { data: sessionData, error: sessionError } = await client.auth.getSession();
     if (!sessionError && sessionData.session?.access_token) {
       const { data: userData, error: userError } = await client.auth.getUser(sessionData.session.access_token);
@@ -46,13 +50,28 @@
         return sessionData.session;
       }
     }
-    try { await client.auth.signOut({ scope: "local" }); } catch (e) {}
-    const { data, error } = await client.auth.signInAnonymously();
-    if (error) throw error;
-    if (!data.session?.access_token || !data.user) throw new Error("No se pudo crear una sesion anonima valida.");
-    state.session = data.session;
-    state.user = data.user;
-    return data.session;
+
+    // 2. Fallback: manual restore from localStorage (same pattern as auth.ui.js)
+    try {
+      const raw = localStorage.getItem("astor-remote-auth");
+      if (raw) {
+        const stored = JSON.parse(raw);
+        if (stored?.access_token && stored?.refresh_token) {
+          const { data: sd, error: se } = await client.auth.setSession({
+            access_token: stored.access_token,
+            refresh_token: stored.refresh_token,
+          });
+          if (!se && sd?.session?.user) {
+            state.session = sd.session;
+            state.user = sd.session.user;
+            return sd.session;
+          }
+        }
+      }
+    } catch (e) {}
+
+    // No valid session — require explicit login
+    throw new Error("Sesión no encontrada. Por favor inicia sesión.");
   }
 
   async function getDataClient() { await ensureSession(); return getAuthClient(); }
@@ -97,7 +116,7 @@
         file.cloudUrl = urlData?.publicUrl || null;
         await client.from("astor_case_files").upsert({ case_id: caseId, owner_id: userId, file_key: key, file_name: file.name, mime_type: file.type, size_bytes: file.size || null, storage_path: storagePath, public_url: file.cloudUrl }, { onConflict: "case_id,file_key" });
         uploaded.push({ key, path: storagePath, url: file.cloudUrl });
-      } catch (err) { errors.push({ key, error: err.message }); }
+      } catch (err) { errors.push({ key, error: err.message}); }
     }
     return { uploaded, errors };
   }
@@ -124,14 +143,16 @@
       updateCloudBadge("Subiendo archivos...");
       const { uploaded, errors } = await uploadFiles(record, data.id, client, session);
       if (uploaded.length > 0) await client.from("astor_cases").update({ payload: recordPayload(record) }).eq("id", data.id);
+      // Sync inverso
       const remoteStatus = data.status;
       const localStatus = record.fields?.orderStatus;
       if (remoteStatus && remoteStatus !== localStatus && remoteStatus !== 'draft') {
         record.fields.orderStatus = remoteStatus;
+        console.info(`ASTOR: estado actualizado por admin -> ${remoteStatus}`);
       }
       if (typeof persistActive === "function") persistActive();
       if (errors.length > 0) updateCloudBadge(`${uploaded.length} archivos · ${errors.length} errores`, true);
-      else updateCloudBadge(uploaded.length > 0 ? `Sincronizado · ${uploaded.length} archivos` : "Sincronizado");
+      else updateCloudBadge(uploaded.length > 0 ? `Sincronizado ½ ${uploaded.length} archivos` : "Sincronizado");
       return { caseId: data.id, caseCode: data.case_code, uploaded, errors };
     } catch (error) { console.error("ASTOR Cloud sync error:", error); updateCloudBadge("Error", true); throw error; }
   }
@@ -144,7 +165,7 @@
 
   async function listCaseFiles(caseId) {
     await init(); const client = await getDataClient();
-    const { data, error } = await client.from("astor_case_files").select("file_key,file_name,mime_type,size_bytes,public_url,created_at").eq("case_id", caseId).order("created_at", { ascending: true });
+    const { data, error } = await client.from("astor_case_files").select("file_key,file_name,mime_type,size_bytes,public_url,created_at").eq("case_id", caseId.order("created_at", { ascending: true });
     if (error) throw error; return data || [];
   }
 
@@ -163,7 +184,7 @@
         const errMsg = result.errors.length > 0 ? `\n⚠ ${result.errors.length} archivo(s) con error:\n  · ${result.errors.map((e) => e.key).join("\n  · ")}` : "";
         alert(`Caso sincronizado.\nCodigo: ${result.caseCode}${fileMsg}${errMsg}`);
       } catch (error) { alert(`No se pudo sincronizar:\n${error.message}`); }
-      finally { button.disabled = false; button.textContent = "Enviar caso a la nube"; }
+      finally { button.disabled = false; button.textContent = "Enviar casoa la nube"; }
     });
     actions.appendChild(button);
   }
@@ -174,7 +195,6 @@
     try { await init(); } catch (error) { console.error("ASTOR Cloud init error:", error); }
   }
 
-  function getClient(){ return state.authClient||null; }
   window.ASTOR_CLOUD = { init, syncRecord, listCloudCases, listCaseFiles, isConfigured, getClient };
   initUi();
 })();
