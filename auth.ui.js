@@ -64,6 +64,8 @@ async function doAuth(isReg){
     ?await client.auth.signUp({email,password:pass,options:{data:{full_name:name||email.split('@')[0]}}})
     :await client.auth.signInWithPassword({email,password:pass});
   if(error)return msg(error.message);
+  // Store profile locally (publishable key JWT omits email)
+  try{localStorage.setItem('astor-profile',JSON.stringify({email,name:name||email.split('@')[0]}));}catch(e){}
   if(isReg&&!data.session)return msg('Revisa tu correo y confirma tu cuenta',true);
   msg('');
   updateUI(data.user);
@@ -71,6 +73,7 @@ async function doAuth(isReg){
 }
 
 async function doSignOut(){
+  try{localStorage.removeItem('astor-profile');}catch(e){}
   const client=getClient();if(!client)return;
   await client.auth.signOut();
   updateUI(null);
@@ -82,9 +85,11 @@ function updateUI(user){
   if(!inEl||!outEl)return;
   if(user){
     inEl.style.display='block';outEl.style.display='none';
-    const name=user.user_metadata?.full_name||user.email.split('@')[0];
+    let _n=user.user_metadata?.full_name||user.email,_e=user.email;
+    if(!_n||!_e){try{const p=JSON.parse(localStorage.getItem('astor-profile')||'{}');_n=_n||p.name||'';_e=_e||p.email||'';}catch(ex){}}
+    const name=_n.includes('@')?_n.split('@')[0]:(_n||'?');
     document.getElementById('aUserName').textContent=name;
-    document.getElementById('aUserEmail').textContent=user.email;
+    document.getElementById('aUserEmail').textContent=_e;
     const nb=document.querySelector('[data-section="nube"]');
     if(nb)nb.textContent='☁ '+name.split(' ')[0];
   }else{
