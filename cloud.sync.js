@@ -1,5 +1,5 @@
 /**
- * ASTOR CLOUD SYNC v2.3
+ * ASTOR CLOUD SYNC v2.4
  */
 (function () {
   "use strict";
@@ -169,7 +169,7 @@
       if (uploaded.length > 0) await client.from("astor_cases").update({ payload: recordPayload(record) }).eq("id", data.id);
       // Sync inverso
       const remoteStatus = data.status;
-      const localStatus = record.fields.localStatus = record.fields?.orderStatus;
+      const localStatus = record.fields?.orderStatus;
       if (remoteStatus && remoteStatus !== localStatus && remoteStatus !== 'draft') {
         record.fields.orderStatus = remoteStatus;
         console.info(`ASTOR: estado actualizado por admin -> ${remoteStatus}`);
@@ -219,10 +219,10 @@
     try { await init(); } catch (error) { console.error("ASTOR Cloud init error:", error); }
   }
 
-  // Eagerly create auth client + patch window.fetch BEFORE auth.ui.js runs
+  // Patch window.fetch FIRST, then create auth client (client captures window.fetch at init)
   if (window.supabase?.createClient && isConfigured()) {
-    getAuthClient();
     _patchFetch(cfg().supabaseUrl);
+    getAuthClient();
   }
 
   window.ASTOR_CLOUD = { init, syncRecord, listCloudCases, listCaseFiles, isConfigured, getClient };
