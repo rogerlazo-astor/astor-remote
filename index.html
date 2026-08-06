@@ -3,51 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gigantes de Azapa — Gira Santiago 2026</title>
+  <title>Gigantes de Azapa Rugby Club — Arica, Chile</title>
   <script src="config.js"></script>
   <script src="form-bridge.js"></script>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Arial,sans-serif;background:#0b0f14;color:#fff;min-height:100vh}
-    .hero{min-height:92vh;display:flex;align-items:flex-end;padding:80px 20px 48px;position:relative;overflow:hidden}
+    .hero{min-height:95vh;display:flex;align-items:flex-end;padding:80px 20px 56px;position:relative;overflow:hidden}
     .hero-inner{position:relative;z-index:1;width:min(1180px,100%);margin:0 auto}
     .hero-tag{display:inline-block;background:#f36b21;border-radius:99px;padding:6px 16px;font-size:.78rem;font-weight:900;margin-bottom:14px;letter-spacing:.3px}
-    h1{font-size:clamp(2.8rem,8vw,6rem);font-weight:900;line-height:.92;margin-bottom:14px}
+    h1{font-size:clamp(3rem,9vw,7rem);font-weight:900;line-height:.88;margin-bottom:16px}
     h1 em{color:#f36b21;font-style:normal}
-    .subtitle{font-size:clamp(1rem,2.5vw,1.3rem);color:rgba(255,255,255,.78);max-width:560px;line-height:1.5;margin-bottom:28px}
+    .subtitle{font-size:clamp(1rem,2.5vw,1.25rem);color:rgba(255,255,255,.78);max-width:560px;line-height:1.6;margin-bottom:32px}
     .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:13px 22px;font-weight:900;font-size:.92rem;text-decoration:none;cursor:pointer;border:none;font-family:inherit}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:13px 22px;font-weight:900;font-size:.92rem;text-decoration:none;cursor:pointer;border:none;font-family:inherit;gap:6px}
     .btn-naranja{background:#f36b21;color:#fff}
     .btn-dark{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
-    .section{padding:48px 20px;background:#0b0f14}
+    .section{padding:56px 20px}
     .section:nth-child(even){background:#111827}
     .section-inner{width:min(1180px,100%);margin:0 auto}
     .section-title{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;margin-bottom:6px}
-    .section-sub{color:rgba(255,255,255,.5);font-size:.88rem;margin-bottom:28px}
+    .section-sub{color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:28px}
     .grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-    .card{background:#111827;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:22px;transition:transform .2s}
-    .card:hover{transform:translateY(-3px)}
-    .card-icon{font-size:2rem;margin-bottom:10px}
-    .card h3{font-size:1.05rem;font-weight:900;margin-bottom:6px}
-    .card p{font-size:.84rem;color:rgba(255,255,255,.6);line-height:1.55;margin-bottom:14px}
-    .card a{display:inline-flex;background:#f36b21;color:#fff;text-decoration:none;border-radius:8px;padding:8px 14px;font-weight:900;font-size:.82rem}
-    .fotos{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:24px}
-    .foto{overflow:hidden;border-radius:10px;aspect-ratio:4/3}
-    .foto img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
-    .foto:hover img{transform:scale(1.05)}
-    .transf{background:rgba(243,107,33,.1);border:1px solid rgba(243,107,33,.3);border-radius:12px;padding:22px;line-height:1.9;font-size:.92rem}
-    .transf strong{color:#f36b21}
-    .recaudado-box{background:linear-gradient(135deg,#111827,#1a0a00);border:1px solid rgba(243,107,33,.3);border-radius:14px;padding:28px;text-align:center;margin-bottom:20px}
+    .card{background:#111827;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:24px;transition:transform .2s,box-shadow .2s}
+    .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(243,107,33,.15)}
+    .card-icon{font-size:2.2rem;margin-bottom:12px}
+    .card h3{font-size:1.05rem;font-weight:900;margin-bottom:8px}
+    .card p{font-size:.84rem;color:rgba(255,255,255,.6);line-height:1.55;margin-bottom:16px}
+    .card a{display:inline-flex;background:#f36b21;color:#fff;text-decoration:none;border-radius:8px;padding:9px 16px;font-weight:900;font-size:.82rem}
+
+    /* GIRA ACTIVA */
+    .gira-banner{background:linear-gradient(135deg,#1a0a00,#111827);border:2px solid #f36b21;border-radius:16px;padding:28px;margin-bottom:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+    .gira-badge{background:#f36b21;color:#fff;font-weight:900;font-size:.75rem;border-radius:8px;padding:6px 14px;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0}
+    .gira-info{flex:1}
+    .gira-info h3{font-size:1.3rem;font-weight:900;margin-bottom:4px}
+    .gira-info p{font-size:.88rem;color:rgba(255,255,255,.7);margin:0}
+    .gira-btns{display:flex;gap:10px;flex-wrap:wrap}
+    .gira-btns a{display:inline-flex;background:#f36b21;color:#fff;text-decoration:none;border-radius:8px;padding:10px 18px;font-weight:900;font-size:.85rem}
+    .gira-btns a.sec{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
+
+    /* RECAUDADO */
+    .recaudado-box{background:linear-gradient(135deg,#111827,#0b0f14);border:1px solid rgba(243,107,33,.3);border-radius:14px;padding:28px;text-align:center;margin-bottom:24px}
     .recaudado-num{font-size:clamp(2.5rem,7vw,5rem);font-weight:900;color:#f36b21;line-height:1}
-    .recaudado-label{color:rgba(255,255,255,.6);font-size:.9rem;margin-top:6px}
-    .pasajes-box{background:#111827;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:20px;margin-bottom:20px}
-    .pasajes-box h3{font-size:1rem;font-weight:900;color:#f36b21;margin-bottom:14px}
-    .pasaje-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07)}
-    .pasaje-item:last-child{border-bottom:none}
-    .pasaje-familia{font-weight:700;font-size:.9rem}
-    .pasaje-miembros{font-size:.78rem;color:rgba(255,255,255,.55)}
-    .pasaje-estado{margin-left:auto;font-size:.75rem;font-weight:900;background:#ecfdf5;color:#065f46;border-radius:999px;padding:3px 10px}
-    footer{text-align:center;padding:28px 20px;color:rgba(255,255,255,.3);font-size:.78rem;border-top:1px solid rgba(255,255,255,.08)}
+    .recaudado-label{color:rgba(255,255,255,.55);font-size:.9rem;margin-top:6px}
+
+    /* FOTOS */
+    .fotos{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:16px}
+    .foto{overflow:hidden;border-radius:12px;aspect-ratio:4/3}
+    .foto.grande{grid-column:span 2;aspect-ratio:16/7}
+    .foto img{width:100%;height:100%;object-fit:cover;transition:transform .35s;display:block}
+    .foto:hover img{transform:scale(1.05)}
+
+    /* STATS */
+    .stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:32px}
+    .stat{background:#111827;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:20px;text-align:center}
+    .stat strong{display:block;font-size:2rem;font-weight:900;color:#f36b21;line-height:1}
+    .stat span{font-size:.78rem;color:rgba(255,255,255,.5);margin-top:4px;display:block}
+
+    footer{text-align:center;padding:32px 20px;color:rgba(255,255,255,.3);font-size:.78rem;border-top:1px solid rgba(255,255,255,.08)}
+    @media(max-width:700px){.foto.grande{grid-column:span 1;aspect-ratio:4/3}.gira-banner{flex-direction:column}}
     @media(max-width:600px){.hero-btns{flex-direction:column}}
   </style>
 </head>
@@ -55,25 +69,59 @@
 
 <section class="hero">
   <div class="hero-inner">
-    <span class="hero-tag">🏉 Gira internacional 2026</span>
+    <span class="hero-tag">🏉 Rugby Club · Arica, Chile</span>
     <h1>Gigantes<br>de <em>Azapa</em></h1>
-    <p class="subtitle">Rugby Club Arica, Chile. Viajamos a Santiago en noviembre 2026. Amistosos vs Stade Français y más equipos. Una experiencia única para nuestros jugadores.</p>
+    <p class="subtitle">Somos un club de rugby formativo ubicado en Arica, Chile. Formamos jugadores, familias y comunidad. Cada partido, cada viaje, cada entrenamiento nos hace más grandes.</p>
     <div class="hero-btns">
-      <a href="inscripcion.html" class="btn btn-naranja">🏉 Inscribir jugador</a>
-      <a href="pasajes.html" class="btn btn-dark">✈️ Pasajes comprados</a>
-      <a href="aportes.html" class="btn btn-dark">💛 Hacer un aporte</a>
+      <a href="inscripcion.html" class="btn btn-naranja">🏉 Unirse al club</a>
+      <a href="album_equipo.html" class="btn btn-dark">⭐ Ver el equipo</a>
+      <a href="galeria_club.html" class="btn btn-dark">📸 Galería</a>
     </div>
   </div>
 </section>
 
 <section class="section">
   <div class="section-inner">
-    <h2 class="section-title">La gira</h2>
-    <p class="section-sub">6 al 8 de noviembre 2026 · Arica → Santiago · Amistosos internacionales</p>
-    <div class="grid-3">
-      <div class="card"><div class="card-icon">🏉</div><h3>Amistosos internacionales</h3><p>Partidos vs Stade Français y otros equipos de Santiago. Categorías M10, M12, M14, Classic y más.</p><a href="itinerario.html">Ver itinerario</a></div>
-      <div class="card"><div class="card-icon">✈️</div><h3>Viaje en avión</h3><p>Pasajes costeados por cada familia. El club cubre alojamiento y alimentación durante la gira.</p><a href="pasajes.html">Ver pasajes</a></div>
-      <div class="card"><div class="card-icon">🏨</div><h3>Alojamiento y comidas</h3><p>El club financia el alojamiento y las comidas. Ayúdanos con actividades mensuales y aportes.</p><a href="actividades.html">Ver actividades</a></div>
+    <!-- GIRA ACTIVA -->
+    <div class="gira-banner">
+      <span class="gira-badge">✈️ Próxima gira</span>
+      <div class="gira-info">
+        <h3>Gira Santiago 2026 — Stade Français y más</h3>
+        <p>6 al 8 de noviembre 2026 · Arica → Santiago · M10, M12, M14, Classic y delegación</p>
+      </div>
+      <div class="gira-btns">
+        <a href="inscripcion.html">🏉 Inscribirse</a>
+        <a href="pasajes.html" class="sec">✈️ Pasajes</a>
+        <a href="itinerario.html" class="sec">🗓 Itinerario</a>
+      </div>
+    </div>
+
+    <h2 class="section-title">El club en números</h2>
+    <p class="section-sub">Gigantes de Azapa Rugby Club · Arica, Chile</p>
+    <div class="stats">
+      <div class="stat"><strong>M10</strong><span>Categoría</span></div>
+      <div class="stat"><strong>M12</strong><span>Categoría</span></div>
+      <div class="stat"><strong>M14</strong><span>Categoría</span></div>
+      <div class="stat"><strong>Classic</strong><span>Categoría</span></div>
+      <div class="stat"><strong id="totalInscritos">—</strong><span>Inscritos gira</span></div>
+      <div class="stat"><strong id="totalAlbum">—</strong><span>En el álbum</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <h2 class="section-title">El equipo</h2>
+    <p class="section-sub">Conoce a los jugadores inscritos para la próxima gira</p>
+    <div class="fotos">
+      <div class="foto grande"><img src="Niños reunidos 2.jpg" alt="Equipo Gigantes de Azapa" loading="lazy"></div>
+      <div class="foto"><img src="m10m12.jpg" alt="M10 M12" loading="lazy"></div>
+      <div class="foto"><img src="Entrenadores.jpg" alt="Entrenadores" loading="lazy"></div>
+      <div class="foto"><img src="3er tiempo.jpg" alt="Tercer tiempo" loading="lazy"></div>
+      <div class="foto"><img src="fogata formando club.jpg" alt="Historia del club" loading="lazy"></div>
+    </div>
+    <div style="text-align:center;margin-top:8px">
+      <a href="album_equipo.html" class="btn btn-naranja">⭐ Ver álbum completo del equipo</a>
     </div>
   </div>
 </section>
@@ -81,16 +129,16 @@
 <section class="section">
   <div class="section-inner">
     <h2 class="section-title">Recaudación del club</h2>
-    <p class="section-sub">Lo que llevamos reunido para alojamiento y comidas en Santiago</p>
+    <p class="section-sub">Lo que llevamos reunido para la Gira Santiago 2026 (alojamiento y comidas)</p>
     <div class="recaudado-box">
       <div class="recaudado-num" id="recaudadoNum">$0</div>
-      <div class="recaudado-label">recaudado para la gira</div>
+      <div class="recaudado-label">recaudado por el club</div>
     </div>
     <div class="grid-3">
       <div class="card"><div class="card-icon">🎰</div><h3>Bingos solidarios</h3><p>3 bingos entre septiembre y noviembre. Participa comprando cartones o ayudando en la organización.</p><a href="bingos.html">Ver bingos</a></div>
-      <div class="card"><div class="card-icon">🌭</div><h3>Completadas solidarias</h3><p>Actividades mensuales de venta de completos, café y té para recaudar fondos.</p><a href="actividades.html">Anotarme</a></div>
-      <div class="card"><div class="card-icon">🎟</div><h3>Rifas</h3><p>Rifas mensuales con premios. Compra números y ayuda al club a llegar a la meta.</p><a href="actividades.html">Ver rifas</a></div>
-      <div class="card"><div class="card-icon">👕</div><h3>Merchandising</h3><p>Productos oficiales del club. Cada compra apoya directamente la gira.</p><a href="merchandising.html">Ver catálogo</a></div>
+      <div class="card"><div class="card-icon">🌭</div><h3>Completadas solidarias</h3><p>Actividades mensuales de venta de completos, café y té. Anótate en la comisión de trabajo.</p><a href="actividades.html">Anotarme</a></div>
+      <div class="card"><div class="card-icon">🎟</div><h3>Rifas</h3><p>Rifas mensuales con premios. Compra números y apoya al club a llegar a la meta.</p><a href="actividades.html">Ver rifas</a></div>
+      <div class="card"><div class="card-icon">👕</div><h3>Merchandising</h3><p>Productos oficiales del club. Cada compra apoya directamente la próxima gira.</p><a href="merchandising.html">Ver catálogo</a></div>
       <div class="card"><div class="card-icon">🏢</div><h3>Sponsors y empresas</h3><p>Tu empresa puede apoyar al club con aportes en dinero, productos o servicios.</p><a href="sponsors.html">Ver paquetes</a></div>
       <div class="card"><div class="card-icon">💛</div><h3>Aportes directos</h3><p>Transfiere el monto que puedas. Cada aporte queda registrado en el avance del club.</p><a href="aportes.html">Hacer un aporte</a></div>
     </div>
@@ -99,13 +147,15 @@
 
 <section class="section">
   <div class="section-inner">
-    <h2 class="section-title">Fotos del club</h2>
-    <p class="section-sub">Gigantes de Azapa Rugby Club · Más que un club, una familia</p>
-    <div class="fotos">
-      <div class="foto"><img src="Niños reunidos 2.jpg" alt="Niños reunidos" loading="lazy"></div>
-      <div class="foto"><img src="m10m12.jpg" alt="M10 M12" loading="lazy"></div>
-      <div class="foto"><img src="Entrenadores.jpg" alt="Entrenadores" loading="lazy"></div>
-      <div class="foto"><img src="3er tiempo.jpg" alt="Tercer tiempo" loading="lazy"></div>
+    <h2 class="section-title">¿Cómo participar?</h2>
+    <p class="section-sub">Todo lo que necesitas para ser parte del club y de la gira</p>
+    <div class="grid-3">
+      <div class="card"><div class="card-icon">📝</div><h3>Inscribir jugador</h3><p>Registra los datos del jugador. Tenemos categorías M10, M12, M14, Classic y delegación adultos.</p><a href="inscripcion.html">Inscribirse</a></div>
+      <div class="card"><div class="card-icon">✈️</div><h3>Registrar pasaje</h3><p>¿Ya compraste el pasaje para la gira? Regístralo para que la directiva sepa quiénes viajan confirmados.</p><a href="pasajes.html">Registrar</a></div>
+      <div class="card"><div class="card-icon">📄</div><h3>Subir documentos</h3><p>Cédula, autorización notarial (menores), ficha médica y seguro de viaje.</p><a href="documentos_carga.html">Subir docs</a></div>
+      <div class="card"><div class="card-icon">🔍</div><h3>Mi estado documental</h3><p>Consulta qué documentos están aprobados y cuáles faltan solo con tu RUT.</p><a href="mi_estado.html">Ver estado</a></div>
+      <div class="card"><div class="card-icon">⭐</div><h3>Álbum del equipo</h3><p>Ve a todos los jugadores inscritos organizados por categoría. Estilo álbum de cromos.</p><a href="album_equipo.html">Ver álbum</a></div>
+      <div class="card"><div class="card-icon">🗓</div><h3>Itinerario</h3><p>Fechas, horarios y actividades de la Gira Santiago 2026 día a día.</p><a href="itinerario.html">Ver itinerario</a></div>
     </div>
   </div>
 </section>
@@ -114,23 +164,25 @@
   <div class="section-inner">
     <h2 class="section-title">Datos de transferencia</h2>
     <p class="section-sub">Para aportes al club</p>
-    <div class="transf">
-      <strong>Angélica Urbina González</strong><br>
+    <div style="background:rgba(243,107,33,.1);border:1px solid rgba(243,107,33,.3);border-radius:12px;padding:24px;line-height:2;font-size:.95rem">
+      <strong style="color:#f36b21">Angélica Urbina González</strong><br>
       RUT: 13.013.011-9<br>
-      BCI Cuenta Corriente: <strong>01-999-124695-7</strong><br>
-      Correo: <strong>gigantesazapa.salta2026@gmail.com</strong><br>
-      Motivo: <strong>Aporte Gira Gigantes de Azapa Santiago 2026</strong>
+      BCI Cuenta Corriente: <strong style="color:#f36b21">01-999-124695-7</strong><br>
+      Correo: <strong style="color:#f36b21">gigantesazapa.salta2026@gmail.com</strong><br>
+      Motivo: <strong style="color:#f36b21">Aporte Gigantes de Azapa Rugby Club</strong>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>Gigantes de Azapa Rugby Club · Arica, Chile · Gira Santiago 2026</p>
+  <p>🏉 Gigantes de Azapa Rugby Club · Arica, Chile</p>
+  <p style="margin-top:6px">Formando jugadores, familias y comunidad desde el norte de Chile</p>
 </footer>
 
 <script>
-async function cargarRecaudado(){
+async function cargarDatos(){
   if(!window.GIGANTES_APPS_SCRIPT_URL||window.GIGANTES_APPS_SCRIPT_URL.includes('PEGAR'))return;
+  // Cargar recaudado
   const cb='meta_'+Date.now(),s=document.createElement('script');
   const url=new URL(window.GIGANTES_APPS_SCRIPT_URL);
   url.searchParams.set('action','meta');url.searchParams.set('callback',cb);
@@ -140,8 +192,19 @@ async function cargarRecaudado(){
   };
   s.onerror=()=>{delete window[cb];s.remove();};
   s.src=url.toString();document.body.appendChild(s);
+
+  // Cargar album para contar jugadores
+  const cb2='album_'+Date.now(),s2=document.createElement('script');
+  const url2=new URL(window.GIGANTES_APPS_SCRIPT_URL);
+  url2.searchParams.set('action','album');url2.searchParams.set('callback',cb2);
+  window[cb2]=(d)=>{delete window[cb2];s2.remove();if(!d||!d.ok)return;
+    const total=d.jugadores?d.jugadores.length:0;
+    document.getElementById('totalAlbum').textContent=total;
+  };
+  s2.onerror=()=>{delete window[cb2];s2.remove();};
+  s2.src=url2.toString();document.body.appendChild(s2);
 }
-cargarRecaudado();
+cargarDatos();
 </script>
 </body>
 </html>
